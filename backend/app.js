@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db.js');
 const socRouter = require('./routes/socRoute.js');
+const AdminRouter = require('./routes/AdminRoute.js');
 const authenticateUser = require('./middlewares/authenticateUser.js');
 const authorizeUser = require('./middlewares/authorizeUser.js');
 require('dotenv').config();
@@ -20,7 +21,6 @@ app.get('/test', (req, res) => {
 
 // User Routes
 app.use('/auth', socRouter);
-
 // Apply authentication middleware to protected routes
 app.use('/user', authenticateUser, (req, res) => {
   // Handle protected route logic here
