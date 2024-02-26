@@ -3,6 +3,7 @@ const connectDB = require('./config/db.js');
 const socRouter = require('./routes/socRoute.js');
 const authenticateUser = require('./middlewares/authenticateUser.js');
 const authorizeUser = require('./middlewares/authorizeUser.js');
+const bookingRouter = require('./routes/booking.Route.js');
 require('dotenv').config();
 
 const app = express();
@@ -20,6 +21,9 @@ app.get('/test', (req, res) => {
 
 // User Routes
 app.use('/auth', socRouter);
+
+//Booking Route
+app.use('/booking', bookingRouter);
 
 // Apply authentication middleware to protected routes
 app.use('/user', authenticateUser, (req, res) => {
