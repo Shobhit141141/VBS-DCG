@@ -1,6 +1,7 @@
 const express = require('express');
 const connectDB = require('./config/db.js');
 const socRouter = require('./routes/socRoute.js');
+const AdminRouter = require('./routes/AdminRoute.js');
 const authenticateUser = require('./middlewares/authenticateUser.js');
 const authorizeUser = require('./middlewares/authorizeUser.js');
 const bookingRouter = require('./routes/booking.Route.js');
