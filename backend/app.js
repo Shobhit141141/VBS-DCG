@@ -32,9 +32,7 @@ app.use('/user', authenticateUser, (req, res) => {
 });
 
 // Apply authorization middleware to restricted routes
-app.use('/admin', authenticateUser, authorizeUser('admin'), (req, res) => {
-  // Handle admin-only route logic here
-});
+app.use('/admin', AdminRouter);
 
 // Start the server
 app.listen(PORT, () => {

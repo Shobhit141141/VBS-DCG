@@ -6,6 +6,7 @@ const bookingSchema = new mongoose.Schema({
   venue: { type: String, enum: [BR_AUDI, RAJ_SOIN, SPS_13], required: true },
   startDateTime: { type: Date, required: true },
   endDateTime: { type: Date, required: true },
+  status: {type: String, enum: ['Pending', 'Approved', 'Rejected'], default: 'Pending'}
 });
 
 // Indexing to sort the booking data as per dateTime in asc order
