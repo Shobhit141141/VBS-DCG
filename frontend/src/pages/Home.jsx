@@ -18,6 +18,7 @@ function Home() {
         <div>
             <h1>Current Date:</h1>
             <p>{homeData.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+            
 
            
             <input type="date" id="dateInput" min={maxDate} />
