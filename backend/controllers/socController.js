@@ -35,13 +35,16 @@ const handleSocSignUp = async (req, res) => {
         .status(400)
         .json({ error: 'Password must have a minimum length of 6 characters' });
     }
-
+    let imagePath = ''; // Default empty path
+    if (req.file && req.file.filename) {
+      imagePath = `/uploads/${req.file.filename}`;
+    }
     // Genrating a hash for password with salt
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create a new user
-    const newUser = new User({ name, email, password: hashedPassword, image: `/uploads/${req.file.filename}` });
+    const newUser = new User({ name, email, password: hashedPassword, image: imagePath });
     await newUser.save();
 
     res

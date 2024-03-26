@@ -1,0 +1,91 @@
+:root {
+    --light-green: #b9e4c9;
+    --light-yellow: #fff6b0;
+    --light-pink: #fcdedf;
+}
+
+.form-main {
+    background-color: var(--light-yellow);
+    width: 400px;
+    margin: auto;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    text-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+label {
+    display: block;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="time"],
+input[type="date"],
+textarea,
+button,
+input[type="file"] {
+    width: 300px;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid black;
+    margin: 10px 0;
+    cursor: pointer;
+}
+
+.time {
+    display: flex;
+    width: 320px;
+    justify-content: center;
+    gap: 20px;
+}
+
+input[type="time"] {
+    width: 130px;
+}
+
+
+select {
+    width: 320px;
+    padding: 10px 0;
+    margin-right: 0.25rem;
+    border: 1px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    
+}
+
+button[type="submit"] {
+    background-color: var(--light-green);
+    color: #333;
+    width: 320px;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    border: 1px solid black;
+}
+
+button[type="submit"]:hover {
+    background-color: #8bff1e;
+}
