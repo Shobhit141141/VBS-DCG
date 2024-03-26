@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Admin = require('../models/adminUniModel');
+const Booking = require('../models/bookingModel');
 
 const handleAdminLogin = async (req, res) => {
   try {
@@ -36,4 +37,31 @@ const handleAdminLogin = async (req, res) => {
   }
 };
 
-module.exports = { handleAdminLogin };
+const handleApproveBooking = async (req, res) => {
+
+  const { bookingId } = req.body;
+  if(!bookingId) {
+    return res.status(400).json({error : "Booking ID is required"});
+  }
+  const bookingDetails = await Booking.findById(bookingId);
+  bookingDetails.status = 'ACCEPTED';
+  bookingDetails.save();
+
+  return res.status(200).json({result : bookingDetails, message : "Booking Approved!"});
+  
+}
+const handleRejectBooking = async (req, res) => {
+  const { bookingId } = req.body;
+  if (!bookingId) {
+    return res.status(400).json({ error: 'Booking ID is required' });
+  }
+  const bookingDetails = await Booking.findById(bookingId);
+  bookingDetails.status = 'REJECTED';
+  bookingDetails.save();
+
+  return res
+    .status(200)
+    .json({ result: bookingDetails, message: 'Booking Rejected!' });
+}
+
+module.exports = { handleAdminLogin, handleApproveBooking, handleRejectBooking };

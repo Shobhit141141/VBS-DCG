@@ -44,13 +44,17 @@ const handleSocSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create a new user
-    const newUser = new User({ name, email, password: hashedPassword, image: imagePath });
+    const newUser = new User({
+      name,
+      email,
+      password: hashedPassword,
+      image: imagePath,
+    });
     await newUser.save();
 
     res
       .status(201)
       .json({ result: newUser, message: 'Society registered successfully' });
-
   } catch (error) {
     console.error('Error registering society:', error);
     res.status(500).json({ error: error.message });
@@ -70,7 +74,7 @@ const handleSocLogin = async (req, res) => {
     }
 
     if (!user) {
-      return res.status(401).json({ error: "Society doesn't exit" });
+      return res.status(401).json({ error: "Society doesn't exist" });
     }
 
     // Check for all field entered or not
@@ -90,11 +94,26 @@ const handleSocLogin = async (req, res) => {
     res
       .status(200)
       .json({ result: user, token, message: 'Society logged in successfully' });
-
   } catch (error) {
     console.error('Error logging in:', error);
     res.status(500).json({ error: error.message });
   }
 };
 
-module.exports = { handleSocLogin, handleSocSignUp };
+const handleResetPassword = async (req, res) => {
+  
+  const { email } = req.body;
+  // To be implemented
+  // requires an support email to be setup
+  
+};
+
+const handleChangePassword = async (req, res) => {
+  
+  const { email } = req.body;
+  // To be implemented
+  // requires an support email to be setup
+
+};
+
+module.exports = { handleSocLogin, handleSocSignUp, handleResetPassword, handleChangePassword};

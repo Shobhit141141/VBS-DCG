@@ -1,5 +1,6 @@
 const Booking = require('../models/bookingModel');
 const { BR_AUDI, RAJ_SOIN, SPS_13 } = require('../constants');
+const Soc = require('../models/socModel');
 
 const fetchBookedSlots = async (req, res) => {
   try {
@@ -17,23 +18,16 @@ const fetchBookedSlots = async (req, res) => {
 
 const handleSlotBooking = async (req, res) => {
   try {
-    const { soc, title, slots, date, venue, organizer, details, file } = req.body;
-
-    if (
-      new Date(date).getHours() < 8 ||
-      new Date(date).getHours() >= 20
-    ) {
-      return res.status(400).json({ error: 'Slot can be booked between 8 AM to 8 PM' });
-    }
+    const { soc, title, slots, date, venue, details, file } = req.body;
 
     if (!Array.isArray(slots) || slots.length === 0) {
       return res.status(400).json({ error: 'Slots must be a non-empty array' });
     }
 
-    // Log request data for debugging
-    console.log('Received request:', { soc, title, slots, date, venue, organizer, details, file });
-
     const isAvailable = await Booking.findOne({ venue, date, slots: { $in: slots } });
+
+    let organizer = await Soc.findById(soc);
+    organizer = organizer.name;
 
     if (!isAvailable) {
       const newBooking = await Booking.create({
@@ -47,11 +41,11 @@ const handleSlotBooking = async (req, res) => {
         file
       });
 
-      return res.status(201).json({ result: newBooking, message: 'Venue booked successfully' });
+      return res.status(201).json({ result: newBooking, message: 'Slot request for the given venue raised successfully' });
     } else {
       return res.status(400).json({
-        error: 'Slot already booked',
-        bookedSlot: isAvailable,
+        error: 'Requested slot is already booked',
+        bookedSlotDetails: isAvailable,
       });
     }
   } catch (err) {
