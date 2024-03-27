@@ -13,7 +13,7 @@ const SignUpForm = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data); // You can handle the form data here, like sending it to a server
+    console.log(data);
   };
 
   return (
