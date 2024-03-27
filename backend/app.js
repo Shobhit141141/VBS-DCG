@@ -6,10 +6,14 @@ const authenticateUser = require('./middlewares/authenticateUser.js');
 const authorizeUser = require('./middlewares/authorizeUser.js');
 const bookingRouter = require('./routes/bookingRoute.js');
 require('dotenv').config();
+var cors = require('cors')
+
+
+
 
 const app = express();
 const PORT = process.env.PORT || 4000;
-
+app.use(cors())
 // Function to connect to mongodb database
 connectDB();
 
