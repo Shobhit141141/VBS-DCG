@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import '../css/Login.css'
 const LoginForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     criteriaMode: "all",
@@ -12,18 +12,18 @@ const LoginForm = () => {
   });
 
   const onSubmit = (data) => {
-    console.log(data); 
+    console.log(data);
   };
 
   return (
-    <div>
+    <div className='login-page'>
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label>Email:</label>
           <input
             type="email"
-            {...register('email', { 
+            {...register('email', {
               required: "Email is required",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -37,7 +37,7 @@ const LoginForm = () => {
           <label>Password:</label>
           <input
             type="password"
-            {...register('password', { 
+            {...register('password', {
               required: "Password is required",
               minLength: {
                 value: 6,

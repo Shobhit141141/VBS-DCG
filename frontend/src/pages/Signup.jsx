@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-
+import '../css/Signup.css'
 const SignUpForm = () => {
   const { register, handleSubmit, formState: { errors } } = useForm({
     criteriaMode: "all",
@@ -17,7 +17,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div>
+    <div className='signup-page'>
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
