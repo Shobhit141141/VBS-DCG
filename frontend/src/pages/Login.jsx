@@ -16,13 +16,13 @@ const LoginForm = () => {
   };
 
   return (
-    <div className='login-page'>
-      <h2>Login</h2>
+    <div className='login-page' >
+      <h2 className='heading'>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label>Email:</label>
+        <div className='form11'>
+          {/* <label>Email:</label> */}
           <input
-            type="email"
+            className='email1' type="email" placeholder="Enter Email"
             {...register('email', {
               required: "Email is required",
               pattern: {
@@ -34,9 +34,9 @@ const LoginForm = () => {
           {errors.email && <span>{errors.email.message}</span>}
         </div>
         <div>
-          <label>Password:</label>
+          {/* <label>Password:</label> */}
           <input
-            type="password"
+            className= 'password1' type="password" placeholder="Enter Password" 
             {...register('password', {
               required: "Password is required",
               minLength: {
@@ -51,7 +51,7 @@ const LoginForm = () => {
           />
           {errors.password && <span>{errors.password.message}</span>}
         </div>
-        <button type="submit">Login</button>
+        <button className='button1' type="submit">Login</button>
       </form>
     </div>
   );
