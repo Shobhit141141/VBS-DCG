@@ -12,38 +12,72 @@ function Home() {
         setHomeData({ ...homeData, date: inputDate });
     };
 
-    const maxDate = new Date().toISOString().split("T")[0]; 
+    const maxDate = new Date().toISOString().split("T")[0];
 
     return (
         <div>
-            <h1>Current Date:</h1>
-            <p>{homeData.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
-
-            <input type="date" id="dateInput" min={maxDate} />
-            <button onClick={handleGoToDate}>Go to Date</button>
-
-            <div className="todays-details">
-                <section>
-                    <h2>Event 1</h2>
-                    <h4>Organized by: Soc1</h4>
-                    <h4>Status: Pending</h4>
-                </section>
+            <div className="todays-details" id="Date">
+                <p>{homeData.date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <div id="button-date">
+                    <input type="date" id="dateInput" min={maxDate} />
+                    <button onClick={handleGoToDate}>Go to </button>
+                </div>
             </div>
 
-            <div className="todays-details">
-                <section>
-                    <h2>Event 2</h2>
-                    <h4>Organized by: Soc2</h4>
-                    <h4>Status: Pending</h4>
-                </section>
-            </div>
+            <div className="sections">
+                <div className="todays-details">
+                    <section>
+                        <h2> Venue 1</h2>
+                        <h3>Event 1</h3>
+                        <h4>Slots: 1(8-11) 
+                        </h4>
+                        <h4> 2(12-15)</h4>
+                        <h4>Status: Pending</h4>
+                        <h5>more details</h5>
+                    </section>
+                </div>
 
-            <div className="todays-details">
-                <section>
-                    <h2>Event 1</h2>
-                    <h4>Organized by: Soc3</h4>
-                    <h4>Status: Pending</h4>
-                </section>
+                <div className="todays-details">
+                    <section>
+                        <h2>Venue 1</h2>
+                        <h3> Event 2</h3>
+                        <h4>Slots: 1(8-11)</h4>
+                        <h4> 2(12-15)</h4>
+                        <h4>Status: Approved</h4>
+                        <h5>more details</h5>
+                    </section>
+                </div>
+
+                <div className="todays-details">
+                    <section>
+                        <h2>Venue 1</h2>
+                        <h3>Event 3</h3>
+                        <h4>Slots: 1(8-11) </h4>
+                        <h4> 2(12-15)</h4>
+                        <h4>Status: Pending</h4>
+                        <h5>more details</h5>
+                    </section>
+                </div>
+                <div className="todays-details">
+                    <section>
+                        <h2>Venue 1</h2>
+                        <h3> Event 4</h3>
+                        <h4>Slots: 1(8-11)</h4>
+                        <h4> 2(12-15)</h4>
+                        <h4>Status: Approved</h4>
+                        <h5>more details</h5>
+                    </section>
+                </div>
+                <div className="todays-details">
+                    <section>
+                        <h2>Venue 1</h2>
+                        <h3> Event 5</h3>
+                        <h4>Slots: 1(8-11)</h4>
+                        <h4> 2(12-15)</h4>
+                        <h4>Status: Approved</h4>
+                        <h5>more details</h5>
+                    </section>
+                </div>
             </div>
         </div>
     );
