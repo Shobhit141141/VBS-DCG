@@ -1,43 +1,54 @@
-.signup-page{
-    display: flex;
-    flex-direction: column ;
-    background-color: rgb(188, 198, 194);
-    width: 500px;
-    height: 500px;
-    justify-content: center;
-    border-radius: 10px;
-    margin-top: 40px;
-    margin-left: 400px;
-    text-align: center;
-    line-height: 75px;
-    font-size: 30px;
-}
-
-.namee,.emaill,.passwordd,.passs{
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+body {
+    background: #208076;    
+    height: 100vh;
   }
+  
 
-
-
-.buttonn{
-    position: absolute;
-    top: 560px;
-    left: 448px;
-    width: 401px;
-    background-color: #0f8375; /* Green */ 
-    border: 10px;
-    border-radius: 15px;
-    color: rgb(255, 255, 255);
-    padding: 15px 32px;
+.signup-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    margin-bottom: 20px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
+  }
+  
+  .namee,
+  .emaill,
+  .passwordd,
+  .passs {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
     font-size: 16px;
-}
-
+  }
+  
+  .buttonn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .buttonn:hover {
+    background-color: #3e8e41;
+  }
+  
+  span {
+    color: red;
+    font-size: 14px;
+  }
