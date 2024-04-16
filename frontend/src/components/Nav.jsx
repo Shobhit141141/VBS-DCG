@@ -6,16 +6,20 @@ import '../css/Nav.css'
 import { useState } from 'react';
 function Nav() {
     const [menu, setmenu] = useState(false);
-
     const handleToggle = () => {
         setmenu(!menu);
-        const navbar = document.querySelector("#navbar")
-        const menubar = document.querySelector("#menubar")
-
+        console.log(menu);
+        console.log(`navbar${menu ? '_active' : ''}`)
     }
 
     return (
-        <div id='navbar'>
+        <div id= {`navbar ${menu ? '_active' : ''}`} >
+            <div id='menubar'>
+                {!menu && <div className= 'nav_toggle' onClick={handleToggle}><FaBars /></div>}
+
+                {menu && <div className='nav_toggle' onClick={handleToggle}><FaXmark /></div>}
+            </div>
+            <div className={`nav_list${menu ? '_active' : ''} `}>
             <Link to='/' className='nav_home'><h4 >Home</h4></Link>
 
             <Link to='/Book' className='nav_book'><h4 >Book</h4></Link>
@@ -25,11 +29,6 @@ function Nav() {
             <Link to='/Login' className='nav_login'><h4 >Login</h4></Link>
 
             <Link to='/Signup' className='nav_signup'><h4 >Signup</h4></Link>
-
-            <div id='menubar'>
-                {menu && <Link to='/Signup' className='nav_toggle' onClick={handleToggle}><FaBars /></Link>}
-
-                {!menu && <Link to='/Signup' className='nav_toggle' onClick={handleToggle}><FaXmark /></Link>}
             </div>
         </div>
     );
