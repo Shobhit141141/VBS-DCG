@@ -52,9 +52,16 @@ const handleSocSignUp = async (req, res) => {
     });
     await newUser.save();
 
+    // Generate a JWT token with payload data
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY);
+
     res
       .status(201)
-      .json({ result: newUser, message: 'Society registered successfully' });
+      .json({
+        result: newUser,
+        token,
+        message: 'Society registered successfully',
+      });
   } catch (error) {
     console.error('Error registering society:', error);
     res.status(500).json({ error: error.message });
@@ -101,19 +108,20 @@ const handleSocLogin = async (req, res) => {
 };
 
 const handleResetPassword = async (req, res) => {
-  
   const { email } = req.body;
   // To be implemented
   // requires an support email to be setup
-  
 };
 
 const handleChangePassword = async (req, res) => {
-  
   const { email } = req.body;
   // To be implemented
   // requires an support email to be setup
-
 };
 
-module.exports = { handleSocLogin, handleSocSignUp, handleResetPassword, handleChangePassword};
+module.exports = {
+  handleSocLogin,
+  handleSocSignUp,
+  handleResetPassword,
+  handleChangePassword,
+};
