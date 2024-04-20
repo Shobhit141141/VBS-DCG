@@ -1,34 +1,52 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import '../css/Login.css'
+import '../css/Login.css';
+import { loginUser } from '../../api/authApi';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+
 const LoginForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
-    criteriaMode: "all",
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    criteriaMode: 'all',
     defaultValues: {
-      email: "",
-      password: ""
+      email: '',
+      password: '',
     },
-    mode: "onBlur"
+    mode: 'onBlur',
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const res = await loginUser(data);
+      toast.success('Logged in!');
+      localStorage.setItem('soc-token', res.data.token);
+      navigate('/');
+    } catch (error) {
+      toast.error(error.response.data.error);
+      console.log(error);
+    }
   };
 
   return (
-    <div className='login-page' >
+    <div className='login-page'>
       <h2 className='heading'>Login</h2>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className='form11'>
           {/* <label>Email:</label> */}
           <input
-            className='email1' type="email" placeholder="Enter Email"
+            className='email1'
+            type='email'
+            placeholder='Enter Email'
             {...register('email', {
-              required: "Email is required",
+              required: 'Email is required',
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Invalid email address"
-              }
+                message: 'Invalid email address',
+              },
             })}
           />
           {errors.email && <span>{errors.email.message}</span>}
@@ -36,22 +54,27 @@ const LoginForm = () => {
         <div>
           {/* <label>Password:</label> */}
           <input
-            className= 'password1' type="password" placeholder="Enter Password" 
+            className='password1'
+            type='password'
+            placeholder='Enter Password'
             {...register('password', {
-              required: "Password is required",
+              required: 'Password is required',
               minLength: {
                 value: 6,
-                message: "Password must be at least 6 characters long"
+                message: 'Password must be at least 6 characters long',
               },
               pattern: {
                 value: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
-                message: "Password must contain at least one uppercase letter and one special symbol"
-              }
+                message:
+                  'Password must contain at least one uppercase letter and one special symbol',
+              },
             })}
           />
           {errors.password && <span>{errors.password.message}</span>}
         </div>
-        <button className='button1' type="submit">Login</button>
+        <button className='button1' type='submit'>
+          Login
+        </button>
       </form>
     </div>
   );
