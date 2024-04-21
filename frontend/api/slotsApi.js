@@ -8,7 +8,7 @@ export const fetchSlots = async (slotDetails) => {
       date: slotDetails.date,
       venue: slotDetails.venue,
     },
-    { headers: { Authorization: localStorage.getItem('soc-token') } }
+    { headers: { Authorization: localStorage.getItem('token') } }
   );
   return res;
 };
@@ -17,7 +17,16 @@ export const bookSlot = async (slotDetails) => {
   const res = await axios.post(
     `${server_uri}/booking/book-slot`,
     slotDetails,
-    { headers: { Authorization: localStorage.getItem('soc-token') } }
+    { headers: { Authorization: localStorage.getItem('token') } }
+  );
+  return res;
+};
+
+
+export const deleteSlot = async (slotId) => {
+  const res = await axios.delete(
+    `${server_uri}/booking/delete-slot/${slotId}`,
+    { headers: { Authorization: localStorage.getItem('token') } }
   );
   return res;
 };

@@ -5,6 +5,7 @@ import '../css/Book.css';
 import toast from 'react-hot-toast';
 import { SLOTS } from '../../constants';
 import { bookSlot } from '../../api/slotsApi';
+import { useNavigate } from 'react-router-dom';
 
 const Book = () => {
   const [formData, setFormData] = useState({
@@ -14,9 +15,9 @@ const Book = () => {
     venue: '',
     details: '',
     file: '',
-    soc: localStorage.getItem('soc-id'),
+    soc: localStorage.getItem('socId'),
   });
-
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     if (name === 'slots') {
@@ -43,6 +44,8 @@ const Book = () => {
       const response = await bookSlot(formData)
       toast.success('Slot booking request created');
       console.log('Booking created:', response.data);
+      navigate('/')
+      
     } catch (error) {
       toast.error(error.response.data.error);
       console.error('Error creating booking:', error);

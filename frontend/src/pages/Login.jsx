@@ -1,11 +1,11 @@
+import React, { useState } from 'react';
+import axios from 'axios';
 import { useForm } from 'react-hook-form';
 import '../css/Login.css';
-import { loginUser } from '../../api/authApi';
-import toast from 'react-hot-toast';
+import { Toaster,toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+import { loginUser } from '../../api/authApi';
 const LoginForm = () => {
-  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -19,29 +19,38 @@ const LoginForm = () => {
     mode: 'onBlur',
   });
 
+  const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState('');
+
   const onSubmit = async (data) => {
     try {
-      const res = await loginUser(data);
+      const response = await loginUser(data);
       toast.success('Logged in!');
-      localStorage.setItem('soc-token', res.data.token);
-      localStorage.setItem('soc-id', res.data.result._id);
+     
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('name', response.data.result.name); 
+      localStorage.setItem('socId',response.data.result._id)
       navigate('/');
+      
+  
     } catch (error) {
-      toast.error(error.response.data.error);
-      console.log(error);
+      if (error.response) {
+        setErrorMessage(error.response.data.error);
+      } else {
+        setErrorMessage('An error occurred. Please try again later.');
+      }
     }
   };
 
   return (
-    <div className='login-page'>
-      <h2 className='heading'>Login</h2>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className='form11'>
-          {/* <label>Email:</label> */}
+    <div className="login-page">
+      <h2 className="heading">Login</h2>
+      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
+        <div className="form-field">
           <input
-            className='email1'
-            type='email'
-            placeholder='Enter Email'
+            type="email"
+            placeholder="Enter Email"
             {...register('email', {
               required: 'Email is required',
               pattern: {
@@ -49,33 +58,27 @@ const LoginForm = () => {
                 message: 'Invalid email address',
               },
             })}
+            className="input-field"
           />
-          {errors.email && <span>{errors.email.message}</span>}
+          {errors.email && <span className="error-message">{errors.email.message}</span>}
         </div>
-        <div>
-          {/* <label>Password:</label> */}
+        <div className="form-field">
           <input
-            className='password1'
-            type='password'
-            placeholder='Enter Password'
+            type="password"
+            placeholder="Enter Password"
             {...register('password', {
               required: 'Password is required',
               minLength: {
                 value: 6,
                 message: 'Password must be at least 6 characters long',
               },
-              pattern: {
-                value: /^(?=.*[A-Z])(?=.*[!@#$%^&*]).{6,}$/,
-                message:
-                  'Password must contain at least one uppercase letter and one special symbol',
-              },
             })}
+            className="input-field"
           />
-          {errors.password && <span>{errors.password.message}</span>}
+          {errors.password && <span className="error-message">{errors.password.message}</span>}
         </div>
-        <button className='button1' type='submit'>
-          Login
-        </button>
+        
+        <button type="submit" className="submit-button">Login</button>
       </form>
     </div>
   );

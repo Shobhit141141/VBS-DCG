@@ -1,52 +1,56 @@
-
-body {
-  background: #208076;    
-  height: 100vh;
-}
-
-
 .login-page {
+  width: 100%;
+  max-width: 400px;
+  margin:  auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  background-color: #f0f0f0;
-  width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  margin-bottom: 20px;
+.heading {
   text-align: center;
+  margin-bottom: 20px;
 }
 
-.email1,.password1 {
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field {
+  margin-bottom: 20px;
+}
+
+.input-field {
   width: 100%;
   padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  font-size: 16px;
 }
 
-.button1 {
-  background-color: #4CAF50;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 16px;
+.input-field::placeholder {
+  color: #999;
 }
 
-.button1:hover {
-  background-color: #3e8e41;
-}
-
-span {
+.error-message {
   color: red;
-  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #333;
 }

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { BR_AUDI, RAJ_SOIN, SPS_13 } = require('../constants');
 
 const bookingSchema = new mongoose.Schema({
-    soc: { type: mongoose.Schema.Types.ObjectId, required: false, ref: 'Soc' },
+    soc: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'Soc' },
     title: {
         type: String,
         required: true

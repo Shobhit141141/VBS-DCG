@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import '../css/Home.css';
-import { fetchSlots } from '../../api/slotsApi';
+import { fetchSlots, deleteSlot } from '../../api/slotsApi'; // Import the deleteSlot function
 import toast from 'react-hot-toast';
 import { SLOTS, VENUES } from '../../constants';
+import { FaTrash } from 'react-icons/fa';
 
 function Home() {
   const [homeData, setHomeData] = useState({
@@ -38,6 +39,17 @@ function Home() {
   useEffect(() => {
     fetchTodaySlots();
   }, [homeData]);
+
+  const handleDeleteSlot = async (id) => {
+    try {
+      await deleteSlot(id);
+      toast.success('Slot deleted successfully');
+      fetchTodaySlots();
+    } catch (error) {
+      console.log(error);
+      toast.error('Failed to delete slot');
+    }
+  };
 
   return (
     <div>
@@ -85,6 +97,11 @@ function Home() {
                   <b>Status:</b> {slot.status}
                 </h3>
                 <h5>{slot.details}</h5>
+
+                <FaTrash
+                  className='del-icon'
+                  onClick={() => handleDeleteSlot(slot._id)}
+                />
               </section>
             </div>
           );

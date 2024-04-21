@@ -67,5 +67,17 @@ const handleSlotBooking = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+const deleteBookedSlot = async (req, res) => {
+  try {
+    const { id } = req.params; 
+    const deletedBooking = await Booking.findByIdAndDelete(id);
+    if (!deletedBooking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+    res.status(200).json({ message: 'Booking deleted successfully', deletedBooking });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 
-module.exports = { fetchBookedSlots, handleSlotBooking };
+module.exports = { fetchBookedSlots, handleSlotBooking, deleteBookedSlot };

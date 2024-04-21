@@ -1,37 +1,33 @@
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
-import { FaXmark } from 'react-icons/fa6';
-import {useNavigate} from 'react-router-dom';
-
+import { FaBars } from 'react-icons/fa'
+import { RiLogoutCircleRLine } from "react-icons/ri";
+import { useNavigate } from 'react-router-dom';
 import '../css/Nav.css';
 import { useState } from 'react';
-function Nav() {
-  const [menu, setmenu] = useState(false);
-  const handleToggle = () => {
-    setmenu(!menu);
-    console.log(menu);
-    console.log(`navbar${menu ? '_active' : ''}`);
-  };
 
+function Nav() {
+  const [menu, setMenu] = useState(false);
   const navigate = useNavigate();
 
+  const handleToggle = () => {
+    setMenu(!menu);
+  };
+
   const handleLogout = () => {
-    localStorage.removeItem('soc-token');
+    localStorage.removeItem('token');
     navigate('/login');
-  }
+  };
 
   return (
-    <div id={`navbar ${menu ? '_active' : ''}`}>
+    <div id={`navbar ${menu ? '_active' : ''}`} className='menubar-comp'>
       <div id='menubar'>
-        {!menu && (
+        {!menu ? (
           <div className='nav_toggle' onClick={handleToggle}>
             <FaBars />
           </div>
-        )}
-
-        {menu && (
+        ) : (
           <div className='nav_toggle' onClick={handleToggle}>
-            <FaXmark />
+            <FaBars />
           </div>
         )}
       </div>
@@ -45,21 +41,19 @@ function Nav() {
         <Link to='/Contact' className='nav_contact'>
           <h4>Contact Us</h4>
         </Link>
-        {!localStorage.getItem('soc-token') ? (
+        {!localStorage.getItem('token') ? (
           <Link to='/Signup' className='nav_signup'>
             <h4>Signup</h4>
           </Link>
         ) : (
           <Link to='/my-slots'>My slots</Link>
         )}
-        {!localStorage.getItem('soc-token') ? (
+        {!localStorage.getItem('token') ? (
           <Link to='/Login' className='nav_login'>
             <h4>Login</h4>
           </Link>
         ) : (
-          <button className='nav_logout' onClick={handleLogout}>
-            Log out
-          </button>
+          <RiLogoutCircleRLine className='nav_logout' onClick={handleLogout} /> 
         )}
       </div>
     </div>

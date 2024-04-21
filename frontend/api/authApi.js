@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const server_uri = 'http://localhost:5000';
+export const server_uri = 'http://localhost:4000';
 
 export const registerUser = async (credentials) => {
   const res = await axios.post(`${server_uri}/auth/signup`, {
@@ -21,7 +21,7 @@ export const loginUser = async (credentials) => {
 
 export const verifyJWT = async () => {
   const res = await axios.get(`${server_uri}/auth/verify-jwt`, {
-    headers: { Authorization: localStorage.getItem('soc-token') },
+    headers: { Authorization: localStorage.getItem('token') },
   });
   return res;
 };

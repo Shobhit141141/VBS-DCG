@@ -25,8 +25,8 @@ app.get('/test', (req, res) => { // to test whether server is running or not
 app.use('/auth', socRouter);
 
 //Booking Route - PROTECTED ROUTE
+// app.use('/booking', authenticateUser, bookingRouter);
 app.use('/booking', authenticateUser, bookingRouter);
-
 // Apply authentication middleware to protected routes
 app.use('/user', authenticateUser, (req, res) => {
   // Handle protected route logic here
