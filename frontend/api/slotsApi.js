@@ -12,3 +12,12 @@ export const fetchSlots = async (slotDetails) => {
   );
   return res;
 };
+
+export const bookSlot = async (slotDetails) => {
+  const res = await axios.post(
+    `${server_uri}/booking/book-slot`,
+    slotDetails,
+    { headers: { Authorization: localStorage.getItem('soc-token') } }
+  );
+  return res;
+};

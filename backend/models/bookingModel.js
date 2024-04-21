@@ -33,6 +33,11 @@ const bookingSchema = new mongoose.Schema({
     file: {
         type: String,
         required: false
+    },
+    status: {
+        type: String,
+        enum: ['Pending', 'Approved', 'Rejected'],
+        default: 'Pending'
     }
 });
 

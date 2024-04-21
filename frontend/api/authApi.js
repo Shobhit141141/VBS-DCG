@@ -18,3 +18,10 @@ export const loginUser = async (credentials) => {
   });
   return res;
 };
+
+export const verifyJWT = async () => {
+  const res = await axios.get(`${server_uri}/auth/verify-jwt`, {
+    headers: { Authorization: localStorage.getItem('soc-token') },
+  });
+  return res;
+};

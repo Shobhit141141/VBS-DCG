@@ -1,26 +1,28 @@
 import { useState } from 'react';
-import axios from 'axios';
-import DatePicker from 'react-datepicker'; // Import DatePicker
-import 'react-datepicker/dist/react-datepicker.css'; // Import DatePicker styles
-import '../css/Book.css'; // Import CSS file
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import '../css/Book.css';
+import toast from 'react-hot-toast';
+import { SLOTS } from '../../constants';
+import { bookSlot } from '../../api/slotsApi';
 
 const Book = () => {
   const [formData, setFormData] = useState({
     title: '',
     slots: [],
-    date: new Date(), // Set initial date value to today
+    date: new Date().toISOString().slice(0, 10),
     venue: '',
-    organizer: '',
     details: '',
-    file: ''
+    file: '',
+    soc: localStorage.getItem('soc-id'),
   });
 
   const handleChange = (e) => {
     const { name, value, checked } = e.target;
     if (name === 'slots') {
-      const updatedSlots = checked ?
-        [...formData.slots, value] :
-        formData.slots.filter(slot => slot !== value);
+      const updatedSlots = checked
+        ? [...formData.slots, value]
+        : formData.slots.filter((slot) => slot !== value);
       setFormData({ ...formData, [name]: updatedSlots });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -28,114 +30,143 @@ const Book = () => {
   };
 
   const handleDateChange = (date) => {
-    setFormData({ ...formData, date });
+    setFormData({
+      ...formData,
+      date: new Date(date).toISOString().slice(0, 10),
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
     try {
-      const response = await axios.post('http://localhost:4000/booking/book-slot', formData);
+      const response = await bookSlot(formData)
+      toast.success('Slot booking request created');
       console.log('Booking created:', response.data);
-      
     } catch (error) {
+      toast.error(error.response.data.error);
       console.error('Error creating booking:', error);
-      
     }
   };
 
   return (
-    <form className="booking-form" onSubmit={handleSubmit}>
+    <form
+      style={{ width: '100%', textAlign: 'left', padding: '10px' }}
+      className='booking-form'
+      onSubmit={handleSubmit}
+    >
       <input
-        type="text"
-        name="title"
+        type='text'
+        name='title'
         value={formData.title}
         onChange={handleChange}
-        placeholder="Title"
+        placeholder='Event name: (eg - orientation, speaker session)'
         required
       />
       <DatePicker
-        name="date"
+        name='date'
         selected={formData.date}
         onChange={handleDateChange}
-        dateFormat="yyyy-MM-dd"
+        dateFormat='yyyy-MM-dd'
         required
       />
       <select
-        name="venue"
+        name='venue'
         value={formData.venue}
         onChange={handleChange}
         required
       >
-        <option value="">Select Venue</option>
-        <option value="Venue 1">Venue 1</option>
-        <option value="Venue 2">Venue 2</option>
-        <option value="Venue 3">Venue 3</option>
+        <option value=''>Select Venue</option>
+        <option value='RAJ_SOIN'>RAJ SOIN HALL</option>
+        <option value='BR_AUDI'>BR AUDI</option>
+        <option value='SPS_13'>SPS 13</option>
       </select>
-      <input
-        type="text"
-        name="organizer"
-        value={formData.organizer}
-        onChange={handleChange}
-        placeholder="Organizer"
-        required
-      />
       <textarea
-        name="details"
+        name='details'
         value={formData.details}
         onChange={handleChange}
-        placeholder="Details"
+        placeholder='Details of the event'
         required
       />
       <div>
         <p>Select Slots:</p>
-        <label>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'normal',
+            gap: '0',
+          }}
+        >
           <input
-            type="checkbox"
-            name="slots"
-            value="slot1"
+            type='checkbox'
+            name='slots'
+            value='slot1'
             checked={formData.slots.includes('slot1')}
             onChange={handleChange}
           />
-          Slot 1
-        </label>
-        <label>
+          <label style={{ width: '100%' }}>{SLOTS['slot1']}</label>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'normal',
+            gap: '0',
+          }}
+        >
           <input
-            type="checkbox"
-            name="slots"
-            value="slot2"
+            type='checkbox'
+            name='slots'
+            value='slot2'
             checked={formData.slots.includes('slot2')}
             onChange={handleChange}
           />
-          Slot 2
-        </label>
-        <label>
+          <label style={{ width: '100%' }}>{SLOTS['slot2']}</label>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'normal',
+            gap: '0',
+          }}
+        >
           <input
-            type="checkbox"
-            name="slots"
-            value="slot3"
+            type='checkbox'
+            name='slots'
+            value='slot3'
             checked={formData.slots.includes('slot3')}
             onChange={handleChange}
           />
-          Slot 3
-        </label>
-        <label>
+          <label style={{ width: '100%' }}>{SLOTS['slot3']}</label>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'normal',
+            gap: '0',
+          }}
+        >
           <input
-            type="checkbox"
-            name="slots"
-            value="slot4"
+            type='checkbox'
+            name='slots'
+            value='slot4'
             checked={formData.slots.includes('slot4')}
             onChange={handleChange}
           />
-          Slot 4
-        </label>
+          <label style={{ width: '100%' }}>{SLOTS['slot4']}</label>
+        </div>
       </div>
+      <label>Attatch PDF file containing all necessary details and docs</label>
       <input
-        type="file"
-        name="file"
+        type='file'
+        name='file'
         onChange={handleChange}
-        accept=".pdf,.doc,.docx"
+        accept='.pdf,.doc,.docx'
       />
-      <button type="submit">Submit</button>
+      <button type='submit'>Submit</button>
     </form>
   );
 };
