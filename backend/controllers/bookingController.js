@@ -5,16 +5,24 @@ const Soc = require('../models/socModel');
 const fetchBookedSlots = async (req, res) => {
   try {
     const { venue, date } = req.body;
-    if (!venue || !date) {
-      return res.status(400).json({ error: 'Venue and date are required' });
+    if (!date) {
+      return res.status(400).json({ error: 'Date is required' });
     }
-
+    if (!venue) {
+      const bookedSlots = await Booking.find({ date });
+      return res
+        .status(200)
+        .json({ result: bookedSlots, message: 'Slots fetched successfully' });
+    }
     const bookedSlots = await Booking.find({ venue, date });
-    res.status(200).json({ result: bookedSlots, message: 'Slots fetched successfully' });
+    return res
+      .status(200)
+      .json({ result: bookedSlots, message: 'Slots fetched successfully' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 };
+
 
 const handleSlotBooking = async (req, res) => {
   try {
@@ -24,7 +32,11 @@ const handleSlotBooking = async (req, res) => {
       return res.status(400).json({ error: 'Slots must be a non-empty array' });
     }
 
-    const isAvailable = await Booking.findOne({ venue, date, slots: { $in: slots } });
+    const isAvailable = await Booking.findOne({
+      venue,
+      date,
+      slots: { $in: slots },
+    });
 
     let organizer = await Soc.findById(soc);
     organizer = organizer.name;
@@ -38,10 +50,13 @@ const handleSlotBooking = async (req, res) => {
         venue,
         organizer,
         details,
-        file
+        file,
       });
 
-      return res.status(201).json({ result: newBooking, message: 'Slot request for the given venue raised successfully' });
+      return res.status(201).json({
+        result: newBooking,
+        message: 'Slot request for the given venue raised successfully',
+      });
     } else {
       return res.status(400).json({
         error: 'Requested slot is already booked',

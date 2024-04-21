@@ -19,7 +19,7 @@ const bookingSchema = new mongoose.Schema({
     },
     venue: {
         type: String,
-        enum: ['Venue 1', 'Venue 2', 'Venue 3'],
+        enum: ['BR_AUDI', 'RAJ_SOIN', 'SPS_13'],
         required: true
     },
     organizer: {

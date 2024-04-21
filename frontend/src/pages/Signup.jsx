@@ -27,6 +27,7 @@ const SignUpForm = () => {
       const res = await registerUser(data);
       toast.success('Society registered!');
       localStorage.setItem('soc-token', res.data.token);
+      localStorage.setItem('soc-id', res.data.result._id);
       navigate('/');
     } catch (error) {
       toast.error(error.response.data.error);

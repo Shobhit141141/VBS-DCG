@@ -24,6 +24,7 @@ const LoginForm = () => {
       const res = await loginUser(data);
       toast.success('Logged in!');
       localStorage.setItem('soc-token', res.data.token);
+      localStorage.setItem('soc-id', res.data.result._id);
       navigate('/');
     } catch (error) {
       toast.error(error.response.data.error);
