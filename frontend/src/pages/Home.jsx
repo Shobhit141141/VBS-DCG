@@ -91,7 +91,6 @@ function Home() {
                   </div>
                 </h3>
                 <h3>
-                  
                   <b>Booked by :</b> {slot.organizer}
                 </h3>
                 <h3>
