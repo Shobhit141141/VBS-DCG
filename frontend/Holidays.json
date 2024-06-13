@@ -1,0 +1,103 @@
+[
+    {
+      "holiday": "Republic Day",
+      "date": "26th January"
+    },
+    {
+      "holiday": "Shivratri",
+      "date": "8th March"
+    },
+    {
+      "holiday": "Holi",
+      "date": "25th March"
+    },
+    {
+      "holiday": "Good Friday",
+      "date": "29th March"
+    },
+    {
+      "holiday": "Eid-UL-Fitr",
+      "date": "11th April"
+    },
+    {
+      "holiday": "Baisakhi",
+      "date": "13th April"
+    },
+    {
+      "holiday": "Ram Navami",
+      "date": "17th April"
+    },
+    {
+      "holiday": "Mahavir Jayanti",
+      "date": "21st April"
+    },
+    {
+      "holiday": "Buddha Purnima",
+      "date": "23rd May"
+    },
+    {
+      "holiday": "Bakrid",
+      "date": "17th June"
+    },
+    {
+      "holiday": "Muharram",
+      "date": "17th July"
+    },
+    {
+      "holiday": "Independence Day",
+      "date": "15th August"
+    },
+    {
+      "holiday": "Raksha Bandhan",
+      "date": "19th August"
+    },
+    {
+      "holiday": "Janmashtami",
+      "date": "26th August"
+    },
+    {
+      "holiday": "Ganesh Chaturthi",
+      "date": "7th September"
+    },
+    {
+      "holiday": "Onam",
+      "date": "15th September"
+    },
+    {
+      "holiday": "Milad-un-nabi",
+      "date": "16th September"
+    },
+    {
+      "holiday": "Gandhi Jayanti",
+      "date": "2nd October"
+    },
+    {
+      "holiday": "Dussehra",
+      "date": "12th October"
+    },
+    {
+      "holiday": "Maharishi Valmiki’s Birthday",
+      "date": "17th October"
+    },
+    {
+      "holiday": "Diwali",
+      "date": "31st October"
+    },
+    {
+      "holiday": "Bhai Dooj",
+      "date": "3rd November"
+    },
+    {
+      "holiday": "Chhat Puja",
+      "date": "7th November"
+    },
+    {
+      "holiday": "Guru Nanak Jayanti",
+      "date": "15th November"
+    },
+    {
+      "holiday": "Christmas",
+      "date": "25th December"
+    }
+  ]
+  
