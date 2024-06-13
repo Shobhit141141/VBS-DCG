@@ -41,6 +41,9 @@ function Nav() {
         <Link to='/Contact' className='nav_contact'>
           <h4>Contact Us</h4>
         </Link>
+        <Link to='/Holidays' className='Holidays'>
+          <h4>Holidays</h4>
+        </Link>
         {!localStorage.getItem('token') ? (
           <Link to='/Signup' className='nav_signup'>
             <h4>Signup</h4>
