@@ -6,6 +6,8 @@ import toast from 'react-hot-toast';
 import { SLOTS } from '../../constants';
 import { bookSlot } from '../../api/slotsApi';
 import { useNavigate } from 'react-router-dom';
+import { CiSquareInfo } from "react-icons/ci";
+
 
 const Book = () => {
   const [formData, setFormData] = useState({
@@ -52,20 +54,29 @@ const Book = () => {
     }
   };
 
+
   return (
+
     <form
       style={{ width: '100%', textAlign: 'left', padding: '10px' }}
       className='booking-form'
       onSubmit={handleSubmit}
     >
-      <input
-        type='text'
-        name='title'
-        value={formData.title}
-        onChange={handleChange}
-        placeholder='Event name: (eg - orientation, speaker session)'
-        required
-      />
+       <label className="eventname"> Event </label>
+      <div className='event-container'>
+     <input
+  type="text"
+  name="title"
+  value={formData.title}
+  onChange={handleChange}
+  required
+  placeholder=" " 
+/>
+
+<label className=  "placeholder">eg - orientation, speaker session</label>
+</div>
+<label className="datename"> Date </label>
+<div className='container-date'>
       <DatePicker
         name='date'
         selected={formData.date}
@@ -73,6 +84,9 @@ const Book = () => {
         dateFormat='yyyy-MM-dd'
         required
       />
+      </div>
+      <label className="venuename"> Venue </label>
+      <div className='container-venue'>
       <select
         name='venue'
         value={formData.venue}
@@ -84,13 +98,19 @@ const Book = () => {
         <option value='BR_AUDI'>BR AUDI</option>
         <option value='SPS_13'>SPS 13</option>
       </select>
+      </div>
+      <label className="detailsname"> Details </label>
+      <div className='container-details'>
       <textarea
         name='details'
         value={formData.details}
         onChange={handleChange}
-        placeholder='Details of the event'
         required
-      />
+       >
+       </textarea>
+       <label className=  "placeholder2">Details of the event</label>
+       </div>
+     
       <div>
         <p>Select Slots:</p>
         <div
@@ -170,8 +190,27 @@ const Book = () => {
         accept='.pdf,.doc,.docx'
       />
       <button type='submit'>Submit</button>
+     <div className='icon-container'>
+     <div className='tooltip-container-event'>
+  <CiSquareInfo className='event-icon'/>
+  <span id="tooltipText-event"> Write the tooltip for event </span>
+  </div>
+  <div className='tooltip-container-date'>
+  <CiSquareInfo className='date-icon'/>
+  <span id="tooltipText-date"> Write the tooltip for date </span>
+  </div>
+  <div className='tooltip-container-venue'>
+  <CiSquareInfo className='venue-icon'/>
+  <span id="tooltipText-venue"> Write the tooltip for venue </span>
+  </div>
+  <div className='tooltip-container-details'>
+  <CiSquareInfo className='detail-icon'/>
+  <span id="tooltipText-details"> Write the tooltip for details </span>
+  </div>
+  </div> 
     </form>
   );
 };
+
 
 export default Book;

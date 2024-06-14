@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../css/Home.css';
-import { fetchSlots, deleteSlot } from '../../api/slotsApi'; // Import the deleteSlot function
+import { fetchSlots, deleteSlot } from '../../api/slotsApi';
 import toast from 'react-hot-toast';
 import { SLOTS, VENUES } from '../../constants';
 import { FaTrash } from 'react-icons/fa';
@@ -26,11 +26,37 @@ function Home() {
 
   const fetchTodaySlots = async () => {
     try {
-      const slots = await fetchSlots({
-        date: new Date(homeData.date).toISOString().slice(0, 10),
-      });
-      console.log(slots);
-      setTodaySlots(slots.data.result);
+      // Dummy data to simulate slots
+      const dummySlots = [
+        {
+          _id: '1',
+          venue: 'venue1',
+          title: 'Dummy Event 1',
+          slots: ['slot1', 'slot2'],
+          organizer: 'Organizer 1',
+          status: 'Booked',
+          details: 'Details for slot 1',
+        },
+        {
+          _id: '2',
+          venue: 'venue2',
+          title: 'Dummy Event 2',
+          slots: ['slot3', 'slot4'],
+          organizer: 'Organizer 2',
+          status: 'Booked',
+          details: 'Details for slot 2',
+        },
+        {
+          _id: '3',
+          venue: 'venue3',
+          title: 'Dummy Event 3',
+          slots: ['slot5', 'slot6'],
+          organizer: 'Organizer 3',
+          status: 'Booked',
+          details: 'Details for slot 3',
+        },
+      ];
+      setTodaySlots(dummySlots);
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +68,7 @@ function Home() {
 
   const handleDeleteSlot = async (id) => {
     try {
-      await deleteSlot(id);
+      // Dummy function as deletion doesn't actually occur in this example
       toast.success('Slot deleted successfully');
       fetchTodaySlots();
     } catch (error) {
@@ -68,11 +94,11 @@ function Home() {
         </div>
       </div>
 
-      {todaySlots.length === 0 && <h1>No booked slots found</h1>}
       <div className='sections'>
+        {todaySlots.length === 0 && <h1>No booked slots found</h1>}
         {todaySlots.map((slot) => {
           return (
-            <div key={slot._id} className='todays-details'>
+            <div key={slot._id} className='todays-details section'>
               <section>
                 <h2>{VENUES[slot.venue]}</h2>
                 <h3>
@@ -80,7 +106,7 @@ function Home() {
                 </h3>
                 <h3>
                   <div style={{ display: 'flex' }}>
-                    <b>Slots : </b>{'  '}
+                    <b>Slots : </b>{' '}
                     <div>
                       {slot.slots.sort().map((item) => (
                         <p style={{ marginLeft: '2px' }} key={item}>
