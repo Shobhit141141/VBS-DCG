@@ -33,6 +33,7 @@
         font-size: 20px;
         transition: color 0.2s, border-bottom 0.2s; 
         border-bottom: 2px solid transparent;
+     
     }
     
     .nav_list a:hover {
@@ -67,7 +68,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            background-color: grey;
+            background-color:black;
             height: 100vh;
             margin: auto;
             justify-content: space-evenly;
@@ -77,5 +78,6 @@
             text-decoration: none;
             color: rgb(255, 255, 255);
             font-size: 20px;
+            margin:-54px;
         }
     }

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa'
+import { CgClose } from "react-icons/cg";
 import { RiLogoutCircleRLine } from "react-icons/ri";
 import { useNavigate } from 'react-router-dom';
 import '../css/Nav.css';
@@ -23,11 +23,11 @@ function Nav() {
       <div id='menubar'>
         {!menu ? (
           <div className='nav_toggle' onClick={handleToggle}>
-            <FaBars />
+            <CgClose />
           </div>
         ) : (
           <div className='nav_toggle' onClick={handleToggle}>
-            <FaBars />
+            <CgClose />
           </div>
         )}
       </div>
