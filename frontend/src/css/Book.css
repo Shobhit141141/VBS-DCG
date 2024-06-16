@@ -13,41 +13,11 @@
   cursor: pointer;
   border-radius: 5px;
 }
-.event-container{
+.container-event{
   position: relative;
   top: 0%;
   left: 0%;
 
-}
-.container-details{
-  position: relative;
-  top: 0%;
-  left: 0%;
-}
-.choose-file-container{
-  position: relative;
-  top: 70px;
-}
-#tooltipText-choosefile {
-  position: absolute; 
-  background-color: rgb(255, 255, 149);
-  color: rgb(0, 0, 0);
-  padding: 5px;
-  visibility: hidden;
-  white-space: nowrap;
-  top:-60px; 
-  left:2px; 
-  outline: auto;
-  outline-color: rgb(96, 96, 96);
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
-}
-.tooltip-container-choosefile {
-  position: relative; 
-}
-.tooltip-container-choosefile:hover #tooltipText-choosefile {
-  visibility: visible; 
-  opacity:  1;
 }
 
 #tooltipText-event {
@@ -57,95 +27,30 @@
   padding: 5px;
   visibility: hidden;
   white-space: nowrap;
-  top: -1004%; 
-  left: 120%; 
+  top: -40px; 
+  left: 50px; 
   outline: auto;
+  width: 100%;
   outline-color: rgb(96, 96, 96);
   opacity: 0;
   transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
 }
 .tooltip-container-event {
   position: absolute; 
+  display: inline-block;
+  padding-right: 180px;
 }
-.tooltip-container-event:hover #tooltipText-event {
+.event-icon:hover + #tooltipText-event {
   visibility: visible; 
   opacity:  1;
 }
-
-#tooltipText-date {
-  position: absolute; 
-  background-color: rgb(217, 215, 215);
-  color: rgb(0, 0, 0);
-  padding: 5px;
-  visibility: hidden;
-  white-space: nowrap;
-  top: -550px; 
-  left: 295px; 
-  outline: auto;
-  outline-color: rgb(96, 96, 96);
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
-}
-.tooltip-container-date {
-  position: absolute; 
-}
-.tooltip-container-date:hover #tooltipText-date {
-  visibility: visible; 
-  opacity:  1;
-}
-
-
-#tooltipText-venue {
-  position: absolute; 
-  background-color: rgb(217, 215, 215);
-  color: rgb(0, 0, 0);
-  padding: 5px;
-  visibility: hidden;
-  white-space: nowrap;
-  top: -529px; 
-  left: 455px; 
-  outline: auto;
-  outline-color: rgb(96, 96, 96);
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
-  
-}
-.tooltip-container-venue {
-  position: absolute; 
-}
-.tooltip-container-venue:hover #tooltipText-venue {
-  visibility: visible; 
-  opacity:  1;
-}
-
-#tooltipText-details {
-  position: absolute; 
-  background-color: rgb(217, 215, 215);
-  color: rgb(0, 0, 0);
-  padding: 5px;letter-spacing: normal;
-  visibility: hidden;
-  white-space: nowrap;
-  top: -498px; 
-  left: 473px; 
-  outline: auto;
-  outline-color: rgb(96, 96, 96); 
-  opacity: 0;
-  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
-}
-.tooltip-container-details {
-  position: absolute; 
-}
-.tooltip-container-details:hover #tooltipText-details {
-  visibility: visible; 
-  opacity:  1;
-}
-.eventname{
- position: relative;
- top: -5px;
-}
-.detailsname{
+.event-icon{
   position: relative;
-  top: -5px;
+  bottom: -6px;
+  left: 420px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
 }
 .placeholder {
   position: absolute;
@@ -156,6 +61,179 @@
   transition: 0.3s;
   pointer-events: none;
 }
+.container-date{
+  margin-top: 10px;
+}
+#tooltipText-date {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  visibility: hidden;
+  white-space: nowrap;
+  top: -38px; 
+  left: 40px; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96);
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+z-index: 1000;
+}
+.tooltip-container-date {
+  position: absolute; 
+  padding-right: 170px;
+}
+.tooltip-container-date:hover #tooltipText-date {
+  visibility: visible; 
+  opacity:  1;
+}
+
+.date-icon{
+  position: relative;
+  bottom: -8px;
+  left: 243px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  z-index: 100;
+}
+.container-venue{
+  margin-top: 10px;
+}
+#tooltipText-venue {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  visibility: hidden;
+  white-space: nowrap;
+  top: -38px; 
+  left: 55px; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96);
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+  
+}
+.tooltip-icon-venue {
+  position: absolute; 
+  padding-right: 200px;
+}
+.venue-icon:hover + #tooltipText-venue {
+  visibility: visible; 
+  opacity:  1;
+}
+.venue-icon{
+  position: relative;
+  bottom: -8px;
+  left: 400px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.container-details{
+  position: relative;
+  top: 0%;
+  left: 0%;
+  margin-top: 10px;
+}
+#tooltipText-details {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;letter-spacing: normal;
+  visibility: hidden;
+  white-space: nowrap;
+  top: -38px; 
+  left: 60px; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96); 
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+}
+.tooltip-container-details {
+  position: absolute; 
+  padding-right: 190px;
+}
+.detail-icon:hover + #tooltipText-details {
+  visibility: visible; 
+  opacity:  1;
+}
+.detail-icon{
+  position: relative;
+  bottom: -10px;
+  left: 420px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.container-slots{
+  border: 1px solid black;
+  padding: 10px;
+  width: 60%;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+#tooltipText-slots {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;letter-spacing: normal;
+  visibility: hidden;
+  white-space: nowrap;
+  top: -50px; 
+  left: 110px; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96); 
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+}
+.tooltip-container-slots {
+  position: absolute; 
+  padding-right: 170px;
+}
+.slots-icon:hover + #tooltipText-slots {
+  visibility: visible; 
+  opacity:  1;
+}
+.slots-icon{
+  position: relative;
+  bottom: -30px;
+  left: 260px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+}
+.container-choosefile{
+  position: relative;
+  margin-top: 50px;
+}
+#tooltipText-choosefile {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  visibility: hidden;
+  white-space: nowrap;
+  top:-40px;
+  left:0; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96);
+  opacity: 0;
+  padding-right: 65px;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+}
+.tooltip-container-choosefile {
+  position: relative; 
+}
+.tooltip-container-choosefile:hover #tooltipText-choosefile {
+  visibility: visible; 
+  opacity:  1;
+}
+.detailsname{
+  position: relative;
+}
+
 .booking-form input:focus+ .placeholder{
   top: -10px;
   color: #333;
@@ -175,39 +253,12 @@
   color: #333;
   background-color: #fff;
 }
-.event-icon{
+
+.slot-label{
   position: relative;
-  bottom: 577px;
-  left: 420px;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
+  left: 2px;
 }
-.date-icon{
-  position: relative;
-  bottom: 558px;
-  left: 240px;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-.venue-icon{
-  position: relative;
-  bottom: 536px;
-  left: 400px;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-.detail-icon{
-  position: relative;
-  bottom: 506px;
-  left: 418px;
-  width: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-                  
+            
 .booking-form button {
   background-color: #4caf50;
   color: white;

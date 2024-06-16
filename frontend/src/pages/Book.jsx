@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 import { SLOTS } from '../../constants';
 import { bookSlot } from '../../api/slotsApi';
 import { useNavigate } from 'react-router-dom';
-import { CiSquareInfo } from "react-icons/ci";
 import { BsInfoLg } from "react-icons/bs";
 
 
@@ -64,7 +63,12 @@ const Book = () => {
       onSubmit={handleSubmit}
     >
        <label className="eventname"> Event </label>
-      <div className='event-container'>
+      <div className='container-event'>
+      <div className='tooltip-container-event'>
+      <BsInfoLg className='event-icon'/>
+  <span id="tooltipText-event"> Write the tooltip for event </span>
+  </div>
+  
      <input
   type="text"
   name="title"
@@ -73,11 +77,15 @@ const Book = () => {
   required
   placeholder=" " 
 />
-
 <label className=  "placeholder">eg - orientation, speaker session</label>
+
 </div>
 <label className="datename"> Date </label>
 <div className='container-date'>
+<div className='tooltip-container-date'>
+  <BsInfoLg className='date-icon'/>
+  <span id="tooltipText-date"> Write the tooltip for date </span>
+  </div>
       <DatePicker
         name='date'
         selected={formData.date}
@@ -88,6 +96,10 @@ const Book = () => {
       </div>
       <label className="venuename"> Venue </label>
       <div className='container-venue'>
+      <div className='tooltip-icon-venue'>
+  <BsInfoLg className='venue-icon'/>
+  <span id="tooltipText-venue"> Write the tooltip for venue </span>
+  </div>
       <select
         name='venue'
         value={formData.venue}
@@ -102,6 +114,10 @@ const Book = () => {
       </div>
       <label className="detailsname"> Details </label>
       <div className='container-details'>
+      <div className='tooltip-container-details'>
+  <BsInfoLg className='detail-icon'/>
+  <span id="tooltipText-details"> Write the tooltip for details </span>
+  </div>
       <textarea
         name='details'
         value={formData.details}
@@ -111,9 +127,12 @@ const Book = () => {
        </textarea>
        <label className=  "placeholder2">Details of the event</label>
        </div>
-     
-      <div>
-        <p>Select Slots:</p>
+       <label className='slot-label'>Select the slot</label>
+      <div className='container-slots'>
+      <div className='tooltip-container-slots'>
+  <BsInfoLg className='slots-icon'/>
+  <span id="tooltipText-slots"> Write the tooltip for slots </span>
+  </div>
         <div
           style={{
             display: 'flex',
@@ -183,36 +202,18 @@ const Book = () => {
           <label style={{ width: '100%' }}>{SLOTS['slot4']}</label>
         </div>
       </div>
-      <div className='choose-file-container'>
+      <div className='container-choosefile'>
       <div className='tooltip-container-choosefile'>
+      <span id="tooltipText-choosefile"> Attatch PDF file containing all necessary details and docs </span>
       <input
         type='file'
         name='file'
         onChange={handleChange}
         accept='.pdf,.doc,.docx'
       />
-      <span id="tooltipText-choosefile"> Attatch PDF file containing all necessary details and docs </span>
       </div>
       <button type='submit'>Submit</button>
-      </div>
-     <div className='icon-container'>
-     <div className='tooltip-container-event'>
-     <BsInfoLg className='event-icon'/>
-  <span id="tooltipText-event"> Write the tooltip for event </span>
-  </div>
-  <div className='tooltip-container-date'>
-  <BsInfoLg className='date-icon'/>
-  <span id="tooltipText-date"> Write the tooltip for date </span>
-  </div>
-  <div className='tooltip-container-venue'>
-  <BsInfoLg className='venue-icon'/>
-  <span id="tooltipText-venue"> Write the tooltip for venue </span>
-  </div>
-  <div className='tooltip-container-details'>
-  <BsInfoLg className='detail-icon'/>
-  <span id="tooltipText-details"> Write the tooltip for details </span>
-  </div>
-  </div> 
+      </div> 
     </form>
   );
 };
