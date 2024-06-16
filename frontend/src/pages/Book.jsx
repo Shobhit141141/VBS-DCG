@@ -7,6 +7,7 @@ import { SLOTS } from '../../constants';
 import { bookSlot } from '../../api/slotsApi';
 import { useNavigate } from 'react-router-dom';
 import { CiSquareInfo } from "react-icons/ci";
+import { BsInfoLg } from "react-icons/bs";
 
 
 const Book = () => {
@@ -182,29 +183,33 @@ const Book = () => {
           <label style={{ width: '100%' }}>{SLOTS['slot4']}</label>
         </div>
       </div>
-      <label>Attatch PDF file containing all necessary details and docs</label>
+      <div className='choose-file-container'>
+      <div className='tooltip-container-choosefile'>
       <input
         type='file'
         name='file'
         onChange={handleChange}
         accept='.pdf,.doc,.docx'
       />
+      <span id="tooltipText-choosefile"> Attatch PDF file containing all necessary details and docs </span>
+      </div>
       <button type='submit'>Submit</button>
+      </div>
      <div className='icon-container'>
      <div className='tooltip-container-event'>
-  <CiSquareInfo className='event-icon'/>
+     <BsInfoLg className='event-icon'/>
   <span id="tooltipText-event"> Write the tooltip for event </span>
   </div>
   <div className='tooltip-container-date'>
-  <CiSquareInfo className='date-icon'/>
+  <BsInfoLg className='date-icon'/>
   <span id="tooltipText-date"> Write the tooltip for date </span>
   </div>
   <div className='tooltip-container-venue'>
-  <CiSquareInfo className='venue-icon'/>
+  <BsInfoLg className='venue-icon'/>
   <span id="tooltipText-venue"> Write the tooltip for venue </span>
   </div>
   <div className='tooltip-container-details'>
-  <CiSquareInfo className='detail-icon'/>
+  <BsInfoLg className='detail-icon'/>
   <span id="tooltipText-details"> Write the tooltip for details </span>
   </div>
   </div> 

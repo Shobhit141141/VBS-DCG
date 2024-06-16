@@ -24,13 +24,38 @@
   top: 0%;
   left: 0%;
 }
+.choose-file-container{
+  position: relative;
+  top: 70px;
+}
+#tooltipText-choosefile {
+  position: absolute; 
+  background-color: rgb(255, 255, 149);
+  color: rgb(0, 0, 0);
+  padding: 5px;
+  visibility: hidden;
+  white-space: nowrap;
+  top:-60px; 
+  left:2px; 
+  outline: auto;
+  outline-color: rgb(96, 96, 96);
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
+}
+.tooltip-container-choosefile {
+  position: relative; 
+}
+.tooltip-container-choosefile:hover #tooltipText-choosefile {
+  visibility: visible; 
+  opacity:  1;
+}
 
 #tooltipText-event {
   position: absolute; 
-  background-color: rgb(217, 215, 215);
+  background-color: rgb(255, 255, 149);
   color: rgb(0, 0, 0);
   padding: 5px;
-  visibility: idden;
+  visibility: hidden;
   white-space: nowrap;
   top: -1004%; 
   left: 120%; 
@@ -40,7 +65,7 @@
   transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
 }
 .tooltip-container-event {
-  position: relative; 
+  position: absolute; 
 }
 .tooltip-container-event:hover #tooltipText-event {
   visibility: visible; 
@@ -62,7 +87,7 @@
   transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
 }
 .tooltip-container-date {
-  position: relative; 
+  position: absolute; 
 }
 .tooltip-container-date:hover #tooltipText-date {
   visibility: visible; 
@@ -86,7 +111,7 @@
   
 }
 .tooltip-container-venue {
-  position: relative; 
+  position: absolute; 
 }
 .tooltip-container-venue:hover #tooltipText-venue {
   visibility: visible; 
@@ -97,7 +122,7 @@
   position: absolute; 
   background-color: rgb(217, 215, 215);
   color: rgb(0, 0, 0);
-  padding: 5px;
+  padding: 5px;letter-spacing: normal;
   visibility: hidden;
   white-space: nowrap;
   top: -498px; 
@@ -108,7 +133,7 @@
   transition: opacity 0.9s ease-in-out, visibility 0.9s ease-in-out ;
 }
 .tooltip-container-details {
-  position: relative; 
+  position: absolute; 
 }
 .tooltip-container-details:hover #tooltipText-details {
   visibility: visible; 
@@ -154,32 +179,32 @@
   position: relative;
   bottom: 577px;
   left: 420px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 }
 .date-icon{
   position: relative;
   bottom: 558px;
   left: 240px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 }
 .venue-icon{
   position: relative;
   bottom: 536px;
   left: 400px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 }
 .detail-icon{
   position: relative;
   bottom: 506px;
   left: 418px;
-  width: 50px;
-  height: 50px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
 }
                   
