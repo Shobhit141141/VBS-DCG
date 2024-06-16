@@ -13,6 +13,7 @@ import ProtectedRoutes from './pages/ProtectedRoutes'
 import MySlots from './pages/MySlots'
 import Contact from './pages/Contact'
 import Holidays from './pages/Holidays'
+import EventDetails from './pages/EventDetails';
 function App() {
   return (
     <>
@@ -25,6 +26,7 @@ function App() {
           <Route element={<ProtectedRoutes />}>
             <Route path='/' element={<Home />} />
             <Route path='/Book' element={<Book />} />
+            <Route path='/event-details/:id' element={<EventDetails />} />
             <Route path='/my-slots' element={<MySlots />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/Holidays' element={<Holidays />} />

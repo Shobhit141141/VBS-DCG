@@ -1,0 +1,13 @@
+.event-details {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f9f9f9;
+  }
+  
+  .event-details h2 {
+    margin-top: 0;
+  }
+  

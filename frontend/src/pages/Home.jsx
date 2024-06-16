@@ -4,6 +4,7 @@ import { fetchSlots, deleteSlot } from '../../api/slotsApi'; // Import the delet
 import toast from 'react-hot-toast';
 import { SLOTS, VENUES } from '../../constants';
 import { FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [homeData, setHomeData] = useState({
@@ -72,38 +73,38 @@ function Home() {
       <div className='sections'>
         {todaySlots.map((slot) => {
           return (
-            <div key={slot._id} className='todays-details'>
-              <section>
-                <h2>{VENUES[slot.venue]}</h2>
-                <h3>
-                  <b>Event :</b> {slot.title}
-                </h3>
-                <h3>
-                  <div style={{ display: 'flex' }}>
-                    <b>Slots : </b>{'  '}
-                    <div>
-                      {slot.slots.sort().map((item) => (
-                        <p style={{ marginLeft: '2px' }} key={item}>
-                          {SLOTS[item]}
-                        </p>
-                      ))}
-                    </div>
+            <Link to={`/${slot._id}`}> <div key={slot._id} className='todays-details'>
+            <section>
+              <h2>{VENUES[slot.venue]}</h2>
+              <h3>
+                <b>Event :</b> {slot.title}
+              </h3>
+              <h3>
+                <div style={{ display: 'flex' }}>
+                  <b>Slots : </b>{'  '}
+                  <div>
+                    {slot.slots.sort().map((item) => (
+                      <p style={{ marginLeft: '2px' }} key={item}>
+                        {SLOTS[item]}
+                      </p>
+                    ))}
                   </div>
-                </h3>
-                <h3>
-                  <b>Booked by :</b> {slot.organizer}
-                </h3>
-                <h3>
-                  <b>Status:</b> {slot.status}
-                </h3>
-                <h5>{slot.details}</h5>
+                </div>
+              </h3>
+              <h3>
+                <b>Booked by :</b> {slot.organizer}
+              </h3>
+              <h3>
+                <b>Status:</b> {slot.status}
+              </h3>
+              <h5>{slot.details}</h5>
 
-                <FaTrash
-                  className='del-icon'
-                  onClick={() => handleDeleteSlot(slot._id)}
-                />
-              </section>
-            </div>
+              <FaTrash
+                className='del-icon'
+                onClick={() => handleDeleteSlot(slot._id)}
+              />
+            </section>
+          </div></Link>
           );
         })}
       </div>
