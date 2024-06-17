@@ -1,3 +1,4 @@
+
 .booking-form {
   max-width: 400px;
   margin: 0 auto;
@@ -13,13 +14,16 @@
   cursor: pointer;
   border-radius: 5px;
 }
+
 .container-event{
   position: relative;
   top: 0%;
   left: 0%;
-
 }
-
+.eventname{
+  position: relative;
+  top: -10px;
+}
 #tooltipText-event {
   position: absolute; 
   background-color: rgb(255, 255, 149);
@@ -37,7 +41,6 @@
 }
 .tooltip-container-event {
   position: absolute; 
-  display: inline-block;
   padding-right: 180px;
 }
 .event-icon:hover + #tooltipText-event {
@@ -54,16 +57,25 @@
 }
 .placeholder {
   position: absolute;
-  top: 10px;
+  top: 30px;
   left: 6px;
   padding: 0px 5px;
   color: #666;
   transition: 0.3s;
   pointer-events: none;
 }
+.booking-form input:focus+ .placeholder{
+  top: 10px;
+  color: #333;
+  background-color: #fff;
+}
+
 .container-date{
   margin-top: 10px;
+  display: flex;
+  flex-direction: column;
 }
+
 #tooltipText-date {
   position: absolute; 
   background-color: rgb(255, 255, 149);
@@ -71,7 +83,7 @@
   padding: 5px;
   visibility: hidden;
   white-space: nowrap;
-  top: -38px; 
+  top: -13px; 
   left: 40px; 
   outline: auto;
   outline-color: rgb(96, 96, 96);
@@ -83,15 +95,15 @@ z-index: 1000;
   position: absolute; 
   padding-right: 170px;
 }
-.tooltip-container-date:hover #tooltipText-date {
+.date-icon:hover + #tooltipText-date {
   visibility: visible; 
   opacity:  1;
 }
 
 .date-icon{
   position: relative;
-  bottom: -8px;
-  left: 243px;
+  bottom: -30px;
+  left: 420px;
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -137,6 +149,10 @@ z-index: 1000;
   left: 0%;
   margin-top: 10px;
 }
+.detailsname{
+  position: relative;
+  top: -10px;
+}
 #tooltipText-details {
   position: absolute; 
   background-color: rgb(255, 255, 149);
@@ -167,23 +183,44 @@ z-index: 1000;
   height: 25px;
   cursor: pointer;
 }
+.placeholder2 {
+  position: absolute;
+  top: 29px;
+  left: 8px;
+  padding: 0px 5px;
+  color: #666;
+  transition: 0.3s;
+  pointer-events: none;
+}
+.booking-form textarea:focus + .placeholder2{
+  top: 10px;
+  color: #333;
+  background-color: #fff;
+}
 .container-slots{
   border: 1px solid black;
   padding: 10px;
   width: 60%;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 50px;
 
 }
+.slot-label{
+  position: relative;
+  left: -10px;
+  bottom: 35px;
+}
+
+
 #tooltipText-slots {
-  position: absolute; 
+  position: relative; 
   background-color: rgb(255, 255, 149);
   color: rgb(0, 0, 0);
   padding: 5px;letter-spacing: normal;
   visibility: hidden;
   white-space: nowrap;
-  top: -50px; 
-  left: 380px; 
+  top: -100px; 
+  left: -130px; 
   outline: auto;
   outline-color: rgb(96, 96, 96); 
   opacity:0;
@@ -199,9 +236,9 @@ z-index: 1000;
   opacity:  1;
 }
 .slots-icon{
-  position: relative;
-  bottom: -30px;
-  left: 525px;
+  position: absolute;
+  bottom: -20px;
+  right: 100px;
   width: 25px;
   height: 25px;
   cursor: pointer;
@@ -235,31 +272,6 @@ z-index: 1000;
 .detailsname{
   position: relative;
 }
-
-.booking-form input:focus+ .placeholder{
-  top: -10px;
-  color: #333;
-  background-color: #fff;
-}
-.placeholder2 {
-  position: absolute;
-  top: 10%;
-  left: 1.5%;
-  padding: 0px 5px;
-  color: #666;
-  transition: 0.3s;
-  pointer-events: none;
-}
-.booking-form textarea:focus + .placeholder2{
-  top: -10px;
-  color: #333;
-  background-color: #fff;
-}
-
-.slot-label{
-  position: relative;
-  left: 2px;
-}
             
 .booking-form button {
   background-color: #4caf50;
@@ -272,4 +284,73 @@ z-index: 1000;
 
 .booking-form button:hover {
   background-color: #45a049;
+}
+@media (min-width: 820px) {
+.booking-form {
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  grid-gap: 30px;
+}
+.container-event,
+.container-date,
+.container-venue,
+.container-details,
+.container-slots,
+.container-choosefile {
+  position: relative;
+  padding: 10px;
+}
+
+.container-event,
+.container-date,
+.container-venue,
+.container-details {
+  grid-column: span 1;
+}
+
+.container-slots,
+.container-choosefile {
+  grid-column: span 2;
+  justify-self: center;
+}
+.container-event{
+  position: relative;
+  margin-top: 10px;
+}
+.event-icon{
+  position: relative;
+  left: 380px;
+}
+.placeholder{
+  position: absolute;
+  top: 40px;
+left: 20px;
+}
+.booking-form input:focus+ .placeholder{
+  top: 24px;
+}
+.date-icon{
+  position: relative;
+  left: 380px;
+}.venue-icon{
+  position: relative;
+  left: 362px;
+}.detail-icon{
+  position: relative;
+  left: 380px;
+} 
+.placeholder2 {
+  position: absolute;
+  top: 40px;
+  left: 15px;
+}
+.booking-form textarea:focus + .placeholder2{
+  top: 22px;
+}
+
+#tooltipText-choosefile {
+  padding-right: 100px;
+}
 }

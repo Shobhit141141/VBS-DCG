@@ -62,8 +62,9 @@ const Book = () => {
       className='booking-form'
       onSubmit={handleSubmit}
     >
-       <label className="eventname"> Event </label>
+       
       <div className='container-event'>
+      <label className="eventname"> Event </label>
       <div className='tooltip-container-event'>
       <BsInfoLg className='event-icon'/>
   <span id="tooltipText-event"> Write the tooltip for event </span>
@@ -80,8 +81,9 @@ const Book = () => {
 <label className=  "placeholder">eg - orientation, speaker session</label>
 
 </div>
-<label className="datename"> Date </label>
+
 <div className='container-date'>
+<label className="datename"> Date </label>
 <div className='tooltip-container-date'>
   <BsInfoLg className='date-icon'/>
   <span id="tooltipText-date"> Write the tooltip for date </span>
@@ -94,8 +96,9 @@ const Book = () => {
         required
       />
       </div>
-      <label className="venuename"> Venue </label>
+      
       <div className='container-venue'>
+      <label className="venuename"> Venue </label>
       <div className='tooltip-icon-venue'>
   <BsInfoLg className='venue-icon'/>
   <span id="tooltipText-venue"> Write the tooltip for venue </span>
@@ -112,8 +115,9 @@ const Book = () => {
         <option value='SPS_13'>SPS 13</option>
       </select>
       </div>
-      <label className="detailsname"> Details </label>
+      
       <div className='container-details'>
+      <label className="detailsname"> Details </label>
       <div className='tooltip-container-details'>
   <BsInfoLg className='detail-icon'/>
   <span id="tooltipText-details"> Write the tooltip for details </span>
@@ -127,8 +131,9 @@ const Book = () => {
        </textarea>
        <label className=  "placeholder2">Details of the event</label>
        </div>
-       <label className='slot-label'>Select the slot</label>
+       
       <div className='container-slots'>
+      <label className='slot-label'>Select the slot</label>
       <div className='tooltip-container-slots'>
   <BsInfoLg className='slots-icon'/>
   <span id="tooltipText-slots"> Write the tooltip for slots </span>
