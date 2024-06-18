@@ -1,18 +1,27 @@
 .menubar-comp{
     margin-bottom: 100px;
-   background-color: red;
+   background-color: black;
     
 }
 .nav_logout{
     font-size: 20px;
     cursor: pointer;
     transition: all 0.2s ;
+    color: rgb(255, 255, 255);;
 }
 
 .nav_logout:hover{
     transform: rotate(180deg) scale(1.04);
     color: red;
 }
+.nav_toggle{
+    color: black;
+    transition: 0.2s;
+}
+.nav_toggle.open{
+    color: white;
+}
+
 @media (width> 768px){
     .nav_list {
         width: 65%;
@@ -67,7 +76,7 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            background-color: grey;
+            background-color: blac;
             height: 100vh;
             margin: auto;
             justify-content: space-evenly;
