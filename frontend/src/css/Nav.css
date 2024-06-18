@@ -66,6 +66,7 @@
             position: absolute;
             top: 40px;
             right: 40px;
+            z-index: 99;
 
         }
         .nav_list {
@@ -76,12 +77,15 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            background-color: blac;
+            background-color: rgb(17, 17, 17);
             height: 100vh;
             margin: auto;
             gap: 10px;
             justify-content: center;
             align-items: center;
+            position: absolute;
+            top: 0;
+            left: 0;
         }
         .nav_list_active a{
             text-decoration: none;
