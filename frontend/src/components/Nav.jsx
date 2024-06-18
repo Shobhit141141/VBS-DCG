@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/Nav.css';
 import { useState } from 'react';
 import { IoCloseSharp } from "react-icons/io5";
+import { RiLogoutCircleRLine } from "react-icons/ri";
 
 function Nav() {
   const [menu, setMenu] = useState(false);
@@ -25,8 +26,8 @@ function Nav() {
   return (
     <div id={`navbar ${menu ? '_active' : ''}`} className='menubar-comp'>
       <div id='menubar'>
-          <div className={`nav_toggle ${menu ? 'open' : ''}`} onClick={handleToggle}>
-          <FaBars />
+      <div className={`nav_toggle ${menu ? 'open' : ''}`} onClick={handleToggle}>
+          {menu ? <IoCloseSharp /> : <FaBars />}
         </div>
       </div>
       <div className={`nav_list${menu ? '_active' : ''} `}>
@@ -54,7 +55,7 @@ function Nav() {
             <h4>Login</h4>
           </Link>
         ) : (
-          <IoCloseSharp className='nav_logout' onClick={handleLogout} /> 
+          <RiLogoutCircleRLine className='nav_logout' onClick={handleLogout} /> 
         )}
       </div>
     </div>
