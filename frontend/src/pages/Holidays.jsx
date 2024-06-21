@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import '../css/Holidays.css';
+import holidaysData from '../data/Holidays.json';
 
 const Holidays = () => {
   const [holidays, setHolidays] = useState([]);
 
   useEffect(() => {
-    fetch('/holidays.json')
-      .then(response => response.json())
-      .then(data => setHolidays(data));
+    setHolidays(holidaysData);
   }, []);
 
   return (
