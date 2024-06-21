@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const server_uri = 'https://vbsdcg.vercel.app';
+export const server_uri = import.meta.env.VITE_APP_SERVER_URL;
 
 export const registerUser = async (credentials) => {
   const res = await axios.post(`${server_uri}/auth/signup`, {
