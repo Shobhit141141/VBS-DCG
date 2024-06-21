@@ -63,10 +63,10 @@
     @media (width< 768px) {
         #menubar{
             display: block;
-            position: absolute;
+            position: fixed;
             top: 40px;
             right: 40px;
-            z-index: 99;
+            z-index: 1000;
 
         }
         .nav_list {
@@ -83,9 +83,10 @@
             gap: 10px;
             justify-content: center;
             align-items: center;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
+            z-index: 999;
         }
         .nav_list_active a{
             text-decoration: none;

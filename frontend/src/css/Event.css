@@ -1,0 +1,27 @@
+.booking-details {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+  }
+  
+  .booking-details h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .booking-details p {
+    margin: 10px 0;
+  }
+  
+  .file-preview {
+    margin-top: 20px;
+  }
+  
+  .file-preview img {
+    max-width: 100%;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  }
+  

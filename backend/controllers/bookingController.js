@@ -23,6 +23,19 @@ const fetchBookedSlots = async (req, res) => {
   }
 };
 
+const fetchBookingById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const booking = await Booking.findById(id);
+    if (!booking) {
+      return res.status(404).json({ error: 'Booking not found' });
+    }
+    res.status(200).json({ result: booking, message: 'Booking fetched successfully' });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 const handleSlotBooking = async (req, res) => {
   try {
@@ -80,4 +93,4 @@ const deleteBookedSlot = async (req, res) => {
   }
 };
 
-module.exports = { fetchBookedSlots, handleSlotBooking, deleteBookedSlot };
+module.exports = { fetchBookedSlots, handleSlotBooking, deleteBookedSlot ,fetchBookingById};

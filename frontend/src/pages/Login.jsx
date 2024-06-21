@@ -26,12 +26,13 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       const response = await loginUser(data);
+      navigate("/")
       toast.success('Logged in!');
      
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('name', response.data.result.name); 
       localStorage.setItem('socId',response.data.result._id)
-      navigate('/');
+   
       
   
     } catch (error) {

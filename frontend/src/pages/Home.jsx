@@ -4,6 +4,7 @@ import { fetchSlots, deleteSlot } from '../../api/slotsApi'; // Import the delet
 import toast from 'react-hot-toast';
 import { SLOTS, VENUES } from '../../constants';
 import { FaTrash } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 function Home() {
   const [homeData, setHomeData] = useState({
@@ -29,7 +30,6 @@ function Home() {
       const slots = await fetchSlots({
         date: new Date(homeData.date).toISOString().slice(0, 10),
       });
-      console.log(slots);
       setTodaySlots(slots.data.result);
     } catch (error) {
       console.log(error);
@@ -72,6 +72,7 @@ function Home() {
       <div className='sections'>
         {todaySlots.map((slot) => {
           return (
+            <Link to={`/event/${slot._id}`}>
             <div key={slot._id} className='todays-details'>
               <section>
                 <h2>{VENUES[slot.venue]}</h2>
@@ -104,6 +105,7 @@ function Home() {
                 />
               </section>
             </div>
+            </Link>
           );
         })}
       </div>
