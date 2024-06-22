@@ -72,7 +72,7 @@ const handleSlotBooking = async (req, res) => {
         venue,
         organizer,
         details,
-        file: files, // Save array of file paths to images field
+        file: files,
       });
 
       return res.status(201).json({
@@ -86,7 +86,8 @@ const handleSlotBooking = async (req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.log(err)
+    res.status(500).json({ error: err});
   }
 }
 const deleteBookedSlot = async (req, res) => {
