@@ -24,4 +24,12 @@
     border-radius: 4px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
-  
+  .event-img-container{
+    display: grid;
+    margin: auto;
+    place-content: center;
+    gap: 10px;
+  }
+  .event-image{
+    width: 150px;
+  }

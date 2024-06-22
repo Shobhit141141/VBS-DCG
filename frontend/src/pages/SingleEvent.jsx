@@ -13,12 +13,15 @@ function Event() {
   useEffect(() => {
     const fetchSlotDetails = async () => {
       try {
-        const response = await fetchSlot({ id }); // Pass id as an object property
+        const response = await fetchSlot({ id });
         setBooking(response.result);
+        console.log(response.result)
       } catch (error) {
         setError(error.message);
       }
     };
+
+
 
     fetchSlotDetails();
   }, [id]);
@@ -40,9 +43,11 @@ function Event() {
       <p><strong>Venue:</strong> {booking.venue}</p>
       <p><strong>Organizer:</strong> {booking.organizer}</p>
       <p><strong>Details:</strong> {booking.details}</p>
+      <div className='event-img-container'>
       {booking.file && booking.file.map((file,index) => (
-        <img src={getImage(file)}alt="" />
+        <img src={file}alt="" className='event-image'/>
       ))}
+      </div>
     </div>
   );
 }

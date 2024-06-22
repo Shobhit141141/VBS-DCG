@@ -15,27 +15,40 @@ const Book = () => {
     date: new Date().toISOString().slice(0, 10),
     venue: "",
     details: "",
-    files: [],
+    files: [], // Array to store base64 encoded files
     soc: localStorage.getItem("socId"),
   });
-
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value, checked, files } = e.target;
+
     if (name === "slots") {
-      let updatedSlots;
-      if (checked) {
-        updatedSlots = [...formData.slots, value];
-      } else {
-        updatedSlots = formData.slots.filter((slot) => slot !== value);
-      }
+      const updatedSlots = checked
+        ? [...formData.slots, value]
+        : formData.slots.filter((slot) => slot !== value);
       setFormData({ ...formData, [name]: updatedSlots });
-    } else if (name === "files") {
-      setFormData({ ...formData, [name]: [...formData.files, ...files] });
+    } else if (name === "file") {
+      // Convert each file to base64
+      const fileArray = Array.from(files);
+      const base64Files = await Promise.all(
+        fileArray.map((file) => convertFileToBase64(file))
+      );
+      setFormData({ ...formData, files: base64Files });
     } else {
       setFormData({ ...formData, [name]: value });
     }
+  };
+
+  const convertFileToBase64 = (file) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        resolve(reader.result.toString());
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
   };
 
   const handleDateChange = (date) => {
@@ -47,19 +60,9 @@ const Book = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (key === 'slots') {
-        formData[key].forEach(slot => data.append('slots', slot));
-      } else if (key === 'files') {
-        Array.from(formData[key]).forEach(file => data.append('images', file));
-      } else {
-        data.append(key, formData[key]);
-      }
-    });
-
+    console.log(formData);
     try {
-      const response = await bookSlot(data);
+      const response = await bookSlot(formData);
       toast.success("Slot booking request created");
       console.log("Booking created:", response.data);
       navigate("/");
@@ -135,6 +138,7 @@ const Book = () => {
               checked={formData.slots.includes(slotKey)}
               onChange={handleChange}
             />
+
             <p>{SLOTS[slotKey]}</p>
           </div>
         ))}
@@ -147,10 +151,10 @@ const Book = () => {
         </label>
         <input
           type="file"
-          name="files"
+          name="file"
           onChange={handleChange}
-          multiple
           accept=".jpg,.jpeg,.png,.gif"
+          multiple // Allow multiple file selection
         />
       </div>
 
