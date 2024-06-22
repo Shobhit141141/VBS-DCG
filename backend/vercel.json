@@ -8,12 +8,9 @@
     ],
     "routes": [
         {
-            "src": "public/uploads/(.*)",
-            "dest": "uploads/$1"
-        },
-        {
             "src": "/(.*)",
-            "dest": "src/app.ts"
+            "dest": "/"
         }
     ]
+    
 }
