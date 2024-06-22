@@ -11,6 +11,8 @@
             "src": "/(.*)",
             "dest": "/"
         }
-    ]
-    
+    ],
+    "env": {
+        "UPLOADS_DIR": "public/uploads"
+    }
 }
