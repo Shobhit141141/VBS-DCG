@@ -11,13 +11,14 @@ var cors = require('cors')
 const app = express();
 const PORT = process.env.PORT || 9000;
 app.use(cors())
+app.use(express.static('public'))
 // Function to connect to mongodb database
 connectDB();
 
 // This middleware helps parse the JSON data and make it available in the req.body object of your route handlers.
 app.use(express.json());
 
-app.get('/test', (req, res) => { // to test whether server is running or not
+app.get('/', (req, res) => { // to test whether server is running or not
   res.status(200).json({ msg: 'Server is UP. working perfectly fine' });
 });
 

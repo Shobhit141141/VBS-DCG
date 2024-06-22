@@ -1,4 +1,3 @@
-// Book.js
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,17 +15,24 @@ const Book = () => {
     date: new Date().toISOString().slice(0, 10),
     venue: "",
     details: "",
-    file: "",
+    files: [],
     soc: localStorage.getItem("socId"),
   });
+
   const navigate = useNavigate();
+
   const handleChange = (e) => {
-    const { name, value, checked } = e.target;
+    const { name, value, checked, files } = e.target;
     if (name === "slots") {
-      const updatedSlots = checked
-        ? [...formData.slots, value]
-        : formData.slots.filter((slot) => slot !== value);
+      let updatedSlots;
+      if (checked) {
+        updatedSlots = [...formData.slots, value];
+      } else {
+        updatedSlots = formData.slots.filter((slot) => slot !== value);
+      }
       setFormData({ ...formData, [name]: updatedSlots });
+    } else if (name === "files") {
+      setFormData({ ...formData, [name]: [...formData.files, ...files] });
     } else {
       setFormData({ ...formData, [name]: value });
     }
@@ -41,9 +47,19 @@ const Book = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
+    const data = new FormData();
+    Object.keys(formData).forEach((key) => {
+      if (key === 'slots') {
+        formData[key].forEach(slot => data.append('slots', slot));
+      } else if (key === 'files') {
+        Array.from(formData[key]).forEach(file => data.append('images', file));
+      } else {
+        data.append(key, formData[key]);
+      }
+    });
+
     try {
-      const response = await bookSlot(formData);
+      const response = await bookSlot(data);
       toast.success("Slot booking request created");
       console.log("Booking created:", response.data);
       navigate("/");
@@ -119,7 +135,6 @@ const Book = () => {
               checked={formData.slots.includes(slotKey)}
               onChange={handleChange}
             />
-
             <p>{SLOTS[slotKey]}</p>
           </div>
         ))}
@@ -132,8 +147,9 @@ const Book = () => {
         </label>
         <input
           type="file"
-          name="file"
+          name="files"
           onChange={handleChange}
+          multiple
           accept=".jpg,.jpeg,.png,.gif"
         />
       </div>

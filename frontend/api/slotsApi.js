@@ -25,10 +25,11 @@ export const bookSlot = async (slotDetails) => {
   const res = await axios.post(
     `${server_uri}/booking/book-slot`,
     slotDetails,
-    { headers: { Authorization: localStorage.getItem('token') } }
+    { headers: { 'Content-Type': 'multipart/form-data', Authorization: localStorage.getItem('token') } }
   );
   return res;
 };
+
 
 export const deleteSlot = async (slotId) => {
   const res = await axios.delete(

@@ -39,12 +39,21 @@ const fetchBookingById = async (req, res) => {
 
 const handleSlotBooking = async (req, res) => {
   try {
-    const { soc, title, slots, date, venue, details, file } = req.body;
+    const { soc, title, slots, date, venue, details } = req.body;
+    let files = req.files.map(file => file.path.replace("punlic","")); 
 
-    if (!Array.isArray(slots) || slots.length === 0) {
+    console.log(req.files)
+    console.log(files)
+
+   
+
+    
+    if (slots.length === 0) {
       return res.status(400).json({ error: 'Slots must be a non-empty array' });
     }
-
+    const slotsArray = Array.isArray(slots) ? slots : [slots];
+    console.log(slotsArray)
+    
     const isAvailable = await Booking.findOne({
       venue,
       date,
@@ -58,12 +67,12 @@ const handleSlotBooking = async (req, res) => {
       const newBooking = await Booking.create({
         soc,
         title,
-        slots,
+        slots:slotsArray,
         date,
         venue,
         organizer,
         details,
-        file,
+        file: files, // Save array of file paths to images field
       });
 
       return res.status(201).json({
@@ -79,7 +88,7 @@ const handleSlotBooking = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
-};
+}
 const deleteBookedSlot = async (req, res) => {
   try {
     const { id } = req.params; 

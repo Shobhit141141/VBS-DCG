@@ -30,18 +30,16 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    file: {
+    file: [{
         type: String,
         required: false
-    },
+    }],
     status: {
         type: String,
         enum: ['Pending', 'Approved', 'Rejected'],
         default: 'Pending'
     }
 });
-
-// Indexing to sort the booking data as per dateTime in asc order
 bookingSchema.index({ date: 1 });
 
 module.exports = mongoose.model('booking', bookingSchema);
