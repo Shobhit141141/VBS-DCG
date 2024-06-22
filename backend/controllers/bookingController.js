@@ -40,7 +40,7 @@ const fetchBookingById = async (req, res) => {
 const handleSlotBooking = async (req, res) => {
   try {
     const { soc, title, slots, date, venue, details } = req.body;
-    let files = req.files.map(file => file.path.replace("punlic","")); 
+    let files = req.files.map(file => file.path.replace("public","")); 
 
     console.log(req.files)
     console.log(files)
