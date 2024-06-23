@@ -38,3 +38,16 @@ export const deleteSlot = async (slotId) => {
   );
   return res;
 };
+
+
+export const fetchAvailableSlots = async (slotDetails) => {
+  const res = await axios.post(
+    `${server_uri}/booking/available-slots`,
+    {
+      date: slotDetails.date,
+      venue: slotDetails.venue,
+    },
+    { headers: { Authorization: localStorage.getItem("token") } }
+  );
+  return res.data;
+};

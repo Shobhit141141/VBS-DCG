@@ -1,7 +1,7 @@
 const Booking = require("../models/bookingModel");
 const { BR_AUDI, RAJ_SOIN, SPS_13 } = require("../constants");
 const Soc = require("../models/socModel");
-
+const { SLOTS } = require("../constants");
 const fetchBookedSlots = async (req, res) => {
   try {
     const { venue, date } = req.body;
@@ -97,9 +97,28 @@ const deleteBookedSlot = async (req, res) => {
   }
 };
 
+const fetchAvailableSlots = async (req, res) => {
+  try {
+    const { venue, date } = req.body;
+    if (!date || !venue) {
+      return res.status(400).json({ error: "Date and venue are required" });
+    }
+
+    const bookedSlots = await Booking.find({ venue, date }).select("slots");
+    const bookedSlotList = bookedSlots.flatMap(booking => booking.slots);
+
+    const allSlots = Object.keys(SLOTS);
+    const availableSlots = allSlots.filter(slot => !bookedSlotList.includes(slot));
+
+    return res.status(200).json({ availableSlots });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
 module.exports = {
   fetchBookedSlots,
   handleSlotBooking,
   deleteBookedSlot,
   fetchBookingById,
+  fetchAvailableSlots
 };

@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/Book.css";
 import toast from "react-hot-toast";
-import { SLOTS } from "../../constants";
-import { bookSlot } from "../../api/slotsApi";
+import { bookSlot, fetchAvailableSlots } from "../../api/slotsApi";
 import { useNavigate } from "react-router-dom";
 import ToolTip from "../components/ToolTip";
+import { SLOTS } from "../../constants";
 
 const Book = () => {
   const [formData, setFormData] = useState({
@@ -15,10 +15,35 @@ const Book = () => {
     date: new Date().toISOString().slice(0, 10),
     venue: "",
     details: "",
-    files: [], // Array to store base64 encoded files
+    files: [],
     soc: localStorage.getItem("socId"),
   });
+  const [availableSlots, setAvailableSlots] = useState([]);
+  const [loadingSlots, setLoadingSlots] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchSlots = async () => {
+      if (formData.date && formData.venue) {
+        setLoadingSlots(true);
+        try {
+          const response = await fetchAvailableSlots({
+            date: formData.date,
+            venue: formData.venue,
+          });
+          console.log(response)
+          setAvailableSlots(response.availableSlots);
+          console.log(availableSlots)
+        } catch (error) {
+          toast.error("Error fetching available slots");
+        } finally {
+          setLoadingSlots(false);
+        }
+      }
+    };
+
+    fetchSlots();
+  }, [formData.date, formData.venue]);
 
   const handleChange = async (e) => {
     const { name, value, checked, files } = e.target;
@@ -29,7 +54,6 @@ const Book = () => {
         : formData.slots.filter((slot) => slot !== value);
       setFormData({ ...formData, [name]: updatedSlots });
     } else if (name === "file") {
-      // Convert each file to base64
       const fileArray = Array.from(files);
       const base64Files = await Promise.all(
         fileArray.map((file) => convertFileToBase64(file))
@@ -60,15 +84,12 @@ const Book = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await bookSlot(formData);
       toast.success("Slot booking request created");
-      console.log("Booking created:", response.data);
       navigate("/");
     } catch (error) {
       toast.error(error.response.data.error);
-      console.error("Error creating booking:", error);
     }
   };
 
@@ -95,7 +116,7 @@ const Book = () => {
         </label>
         <DatePicker
           name="date"
-          selected={formData.date}
+          selected={new Date(formData.date)}
           onChange={handleDateChange}
           dateFormat="yyyy-MM-dd"
         />
@@ -114,6 +135,38 @@ const Book = () => {
         </select>
       </div>
 
+      {formData.date && formData.venue ? (
+        loadingSlots ? (
+          <div className="form-group">
+            <h3>Loading available slots...</h3>
+          </div>
+        ) : (
+          <div className="form-group">
+            <h3>Select Slots</h3>
+            {availableSlots.length > 0 ? (
+              availableSlots.map((slotKey) => (
+                <div key={slotKey} className="slot-group">
+                  <input
+                    type="checkbox"
+                    name="slots"
+                    value={slotKey}
+                    checked={formData.slots.includes(slotKey)}
+                    onChange={handleChange}
+                  />
+                  <p>{SLOTS[slotKey]}</p>
+                </div>
+              ))
+            ) : (
+              <p>No slots available for the selected date and venue.</p>
+            )}
+          </div>
+        )
+      ) : (
+        <div className="form-group">
+          <h3>Select Date and Venue to see available slots</h3>
+        </div>
+      )}
+
       <div className="form-group">
         <label>
           <h3>Event Details</h3>
@@ -128,23 +181,6 @@ const Book = () => {
       </div>
 
       <div className="form-group">
-        <h3>Select Slots</h3>
-        {Object.keys(SLOTS).map((slotKey) => (
-          <div key={slotKey} className="slot-group">
-            <input
-              type="checkbox"
-              name="slots"
-              value={slotKey}
-              checked={formData.slots.includes(slotKey)}
-              onChange={handleChange}
-            />
-
-            <p>{SLOTS[slotKey]}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="form-group">
         <label>
           <h3>Attach files related to event</h3>
           <ToolTip text="Attach PDF file containing all necessary details and docs" />
@@ -154,7 +190,7 @@ const Book = () => {
           name="file"
           onChange={handleChange}
           accept=".jpg,.jpeg,.png,.gif"
-          multiple // Allow multiple file selection
+          multiple
         />
       </div>
 
