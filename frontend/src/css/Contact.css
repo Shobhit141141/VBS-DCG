@@ -1,0 +1,82 @@
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .contact-email {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .contact-email:hover {
+    text-decoration: underline;
+  }
+  
+  .contact-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .input-group {
+    display: flex;
+    flex-direction: column; /* Ensure inputs stack vertically */
+    align-items: center; /* Center the inputs */
+    width: 100%;
+    max-width: 800px;  /* Increase the maximum width */
+    margin-bottom: 15px;
+    position: relative;
+  }
+  
+  .contact-input,
+  .contact-textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensure padding is included in the width calculation */
+  }
+  
+  .contact-input:focus,
+  .contact-textarea:focus {
+    outline: none;
+    border-color: #007BFF;
+  }
+  
+  .contact-textarea {
+    height: 100px;
+    resize: vertical;
+  }
+  
+  .contact-submit {
+    width: 30%;
+    max-width: 800px;  /* Match the maximum width of input boxes */
+    padding: 10px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center; /* Ensure button text is centered */
+  }
+  
+  .contact-submit:hover {
+    background-color: #0056b3;
+  }
+  
+  .error {
+    color: red;
+    font-size: 12px;
+    position: absolute;
+    left: 100%; /* Align the error message to the right side of the input */
+    margin-left: 10px; /* Add some space between the input and the error message */
+    white-space: nowrap; /* Prevent line breaks */
+  }
+  
