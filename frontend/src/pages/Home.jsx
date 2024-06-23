@@ -1,16 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import '../css/Home.css';
-import { fetchSlots, deleteSlot } from '../../api/slotsApi'; // Import the deleteSlot function
+import { fetchSlots, deleteSlot} from '../../api/slotsApi';
+
 import toast from 'react-hot-toast';
 import { SLOTS, VENUES } from '../../constants';
 import { FaTrash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { approveBooking, rejectBooking } from '../../api/adminApi';
 
 function Home() {
+  const { role } = useContext(AuthContext);
   const [homeData, setHomeData] = useState({
     date: new Date(),
     status: '',
   });
+  const [selectedVenue, setSelectedVenue] = useState('');
+  const [todaySlots, setTodaySlots] = useState([]);
 
   const handleGoToDate = () => {
     const inputDate = new Date(document.getElementById('dateInput').value);
@@ -23,8 +29,6 @@ function Home() {
 
   const maxDate = new Date().toISOString().split('T')[0];
 
-  const [todaySlots, setTodaySlots] = useState([]);
-
   const fetchTodaySlots = async () => {
     try {
       const slots = await fetchSlots({
@@ -35,7 +39,6 @@ function Home() {
       console.log(error);
     }
   };
-
 
   useEffect(() => {
     fetchTodaySlots();
@@ -50,6 +53,99 @@ function Home() {
       console.log(error);
       toast.error('Failed to delete slot');
     }
+  };
+
+  const handleVenueChange = (venue) => {
+    setSelectedVenue(venue);
+  };
+
+  const handleApprove = async (bookingId) => {
+    try {
+      const result = await approveBooking(bookingId);
+      toast.success('Booking approved successfully');
+      fetchTodaySlots()
+      // Optionally update UI or fetch updated data
+    } catch (error) {
+      console.error('Error approving booking:', error);
+      toast.error('Failed to approve booking');
+    }
+  };
+
+  const handleReject = async (bookingId) => {
+    try {
+      const result = await rejectBooking(bookingId);
+      toast.success('Booking rejected successfully');
+      fetchTodaySlots()
+      // Optionally update UI or fetch updated data
+    } catch (error) {
+      console.error('Error rejecting booking:', error);
+      toast.error('Failed to reject booking');
+    }
+  };
+
+  const renderEvents = () => {
+    if (todaySlots.length === 0) {
+      return <h1>No booked slots found</h1>;
+    }
+
+    let filteredSlots = todaySlots;
+    if (selectedVenue) {
+      filteredSlots = todaySlots.filter((slot) => slot.venue === selectedVenue);
+    }
+
+    if (filteredSlots.length === 0) {
+      return <h1>No slots found for selected venue</h1>;
+    }
+
+    return (
+      <div className='sections'>
+        {filteredSlots.map((slot) => (
+          <div className='todays-details'>
+               <Link to={`/event/${slot._id}`} key={slot._id}>
+              <section>
+                <h2>{VENUES[slot.venue]}</h2>
+                <h3>
+                  <b>Event :</b> {slot.title}
+                </h3>
+                <h3>
+                  <div style={{ display: 'flex' }}>
+                    <b>Slots : </b>{' '}
+                    <div>
+                      {slot.slots.sort().map((item) => (
+                        <p style={{ marginLeft: '2px' }} key={item}>
+                          {SLOTS[item]}
+                        </p>
+                      ))}
+                      {slot.slots.length === 0 && <p>No slots booked</p>}
+                    </div>
+                  </div>
+                </h3>
+                <h3>
+                  <b>Booked by :</b> {slot.organizer}
+                </h3>
+                <h3>
+                  <b>Status:</b> {slot.status}
+                </h3>
+                <h5>{slot.details}</h5>
+
+             
+
+                <FaTrash
+                  className='del-icon'
+                  onClick={() => handleDeleteSlot(slot._id)}
+                />
+              </section>
+               </Link>
+               {role === 'admin' && (
+                  <div>
+                    <button onClick={() => handleApprove(slot._id)}>Approve</button>
+                    <button onClick={() => handleReject(slot._id)}>Reject</button>
+                  </div>
+                )}
+            </div>
+        ))}
+      </div>
+    );
   };
 
   return (
@@ -69,47 +165,14 @@ function Home() {
         </div>
       </div>
 
-      {todaySlots.length === 0 && <h1>No booked slots found</h1>}
-      <div className='sections'>
-        {todaySlots.map((slot) => {
-          return (
-            <Link to={`/event/${slot._id}`}>
-            <div key={slot._id} className='todays-details'>
-              <section>
-                <h2>{VENUES[slot.venue]}</h2>
-                <h3>
-                  <b>Event :</b> {slot.title}
-                </h3>
-                <h3>
-                  <div style={{ display: 'flex' }}>
-                    <b>Slots : </b>{'  '}
-                    <div>
-                      {slot.slots.sort().map((item) => (
-                        <p style={{ marginLeft: '2px' }} key={item}>
-                          {SLOTS[item]}
-                        </p>
-                      ))}
-                    </div>
-                  </div>
-                </h3>
-                <h3>
-                  <b>Booked by :</b> {slot.organizer}
-                </h3>
-                <h3>
-                  <b>Status:</b> {slot.status}
-                </h3>
-                <h5>{slot.details}</h5>
-
-                <FaTrash
-                  className='del-icon'
-                  onClick={() => handleDeleteSlot(slot._id)}
-                />
-              </section>
-            </div>
-            </Link>
-          );
-        })}
+      <div className='venue-tabs'>
+        <button onClick={() => handleVenueChange('')}>All</button>
+        <button onClick={() => handleVenueChange('RAJ_SOIN')}>RAJ SOIN HALL</button>
+        <button onClick={() => handleVenueChange('BR_AUDI')}>BR AUDI</button>
+        <button onClick={() => handleVenueChange('SPS_13')}>SPS 13</button>
       </div>
+
+      {renderEvents()}
     </div>
   );
 }

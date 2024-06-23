@@ -44,7 +44,7 @@ const handleApproveBooking = async (req, res) => {
     return res.status(400).json({error : "Booking ID is required"});
   }
   const bookingDetails = await Booking.findById(bookingId);
-  bookingDetails.status = 'ACCEPTED';
+  bookingDetails.status = 'Approved';
   bookingDetails.save();
 
   return res.status(200).json({result : bookingDetails, message : "Booking Approved!"});
@@ -56,7 +56,7 @@ const handleRejectBooking = async (req, res) => {
     return res.status(400).json({ error: 'Booking ID is required' });
   }
   const bookingDetails = await Booking.findById(bookingId);
-  bookingDetails.status = 'REJECTED';
+  bookingDetails.status = 'Rejected';
   bookingDetails.save();
 
   return res

@@ -1,14 +1,15 @@
-/* Tooltip.css */
 .tooltip-container {
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .tooltip-text {
     position: absolute;
-    top: 20px; 
-    left: 0;
-    z-index: 1;
+    top: -50px; /* Adjust the distance from the icon */
+    left: 50%; /* Center the tooltip relative to the icon */
+    transform: translateX(-50%); /* Center horizontally */
+    z-index: 99;
     min-width: 250px;
     background-color: #555;
     color: #fff;
@@ -18,27 +19,19 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s, visibility 0.3s;
+    pointer-events: none; /* Prevents tooltip from interfering with hover */
 }
 
 .tooltip-container:hover .tooltip-text {
     visibility: visible;
     opacity: 1;
+    pointer-events: auto; /* Allows interaction with tooltip */
 }
 
-@media (width<768px) {
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
     .tooltip-text {
-        position: absolute;
-        top: 20px; 
-        left: 0;
-        z-index: 1;
         min-width: 180px;
-        background-color: #555;
-        color: #fff;
-        text-align: center;
-        border-radius: 6px;
-        padding: 5px;
-        visibility: hidden;
-        opacity: 0;
-        transition: opacity 0.3s, visibility 0.3s;
+        top: -50px; /* Adjust the distance from the icon */
     }
 }
