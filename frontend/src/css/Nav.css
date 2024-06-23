@@ -78,7 +78,7 @@
             flex-direction: column;
             width: 100%;
             background-color: rgb(17, 17, 17);
-            height: 100vh;
+            height: 100%;
             margin: auto;
             gap: 10px;
             justify-content: center;
@@ -86,6 +86,7 @@
             position: fixed;
             top: 0;
             left: 0;
+            bottom: 0;
             z-index: 999;
         }
         .nav_list_active a{
