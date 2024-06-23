@@ -1,0 +1,58 @@
+.sections{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    gap: 50px;
+    justify-content: center;
+    
+}
+
+.todays-details section{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 300px;
+    height: auto;
+    background-color: rgb(255, 255, 149);
+    border-radius: 20px;    
+    margin: 10px 0;
+    padding: 20px;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+
+    transition: all 0.4s;
+}
+.todays-details section:hover{
+    transform: scale(1.04) rotate(-2deg);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+#Date{  
+    font-size: 40px;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+h2{font-weight: 800;}
+h3{font-weight: 500;}
+h4{font-weight: 500;}
+h5{font-weight: 500;
+color: #0000EE;}
+
+
+.del-icon{
+    background-color: rgb(255, 78, 69);
+    padding: 8px;
+    border-radius: 50%;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.del-icon:hover{
+    background-color:rgb(220, 1, 1);
+}
