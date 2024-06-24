@@ -21,7 +21,7 @@
     cursor: pointer;
     transition: all 0.4s;
 }
-.eventSection h2,h3, .eventSection h5{
+.eventSection h2, .eventSection h3, .eventSection h5{
     text-decoration: none;
     color: #ffffff;
 }
