@@ -3,7 +3,6 @@
     grid-template-columns: repeat(auto-fill, 300px);
     gap: 50px;
     justify-content: center;
-    
 }
 
 .todays-details section{
@@ -13,15 +12,18 @@
     align-items: flex-start;
     width: 300px;
     height: auto;
-    background-color: rgb(255, 255, 149);
+    background-color: #686868;
     border-radius: 20px;    
-    margin: 10px 0;
+    margin: 20px 0;
     padding: 20px;
     position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     cursor: pointer;
-
     transition: all 0.4s;
+}
+.eventSection h2, .eventSection h3, .eventSection h5{
+    text-decoration: none;
+    color: #ffffff;
 }
 .todays-details section:hover{
     transform: scale(1.04) rotate(-2deg);
@@ -35,24 +37,55 @@
     margin-bottom: 10px;
     margin-top: 10px;
 }
-h2{font-weight: 800;}
-h3{font-weight: 500;}
+
+
+h2{
+    font-weight: 800;
+    text-decoration: none;
+}
+h3{font-weight: 500;
+    text-decoration: none;
+}
 h4{font-weight: 500;}
-h5{font-weight: 500;
-color: #0000EE;}
+h5{font-weight: 500;}
 
-
-.del-icon{
-    background-color: rgb(255, 78, 69);
-    padding: 8px;
-    border-radius: 50%;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
-    transition: all 0.2s;
+.venueButton {
+    background-color: #2d2d2d; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    color: #ffffff; 
+    padding: 7px 15px; 
+    margin: 5px; 
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
 }
 
-.del-icon:hover{
-    background-color:rgb(220, 1, 1);
+
+.venueButton:hover {
+    background-color: #686868; 
+    color: #ffffff; 
+}
+
+
+.venueButton:active {
+    background-color: #686868; 
+    color: #ffffff; 
+}
+
+
+.venueButton:focus {
+    outline: none; 
+    box-shadow: 0 0 0 3px rgba(0, 42, 255, 0.25); 
+}
+.goToDateButton{
+    background-color: #2d2d2d; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    color: #ffffff; 
+    padding: 4px 15px; 
+    margin: 5px; 
+    font-size: 14px; 
+    cursor: pointer; 
+    transition: background-color 0.3s, color 0.3s; 
 }

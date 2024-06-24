@@ -44,16 +44,16 @@ function Home() {
     fetchTodaySlots();
   }, [homeData]);
 
-  const handleDeleteSlot = async (id) => {
-    try {
-      await deleteSlot(id);
-      toast.success('Slot deleted successfully');
-      fetchTodaySlots();
-    } catch (error) {
-      console.log(error);
-      toast.error('Failed to delete slot');
-    }
-  };
+  // const handleDeleteSlot = async (id) => {
+  //   try {
+  //     await deleteSlot(id);
+  //     toast.success('Slot deleted successfully');
+  //     fetchTodaySlots();
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error('Failed to delete slot');
+  //   }
+  // };
 
   const handleVenueChange = (venue) => {
     setSelectedVenue(venue);
@@ -102,7 +102,7 @@ function Home() {
         {filteredSlots.map((slot) => (
           <div className='todays-details'>
                <Link to={`/event/${slot._id}`} key={slot._id}>
-              <section>
+              <section className='eventSection'>
                 <h2>{VENUES[slot.venue]}</h2>
                 <h3>
                   <b>Event :</b> {slot.title}
@@ -130,10 +130,10 @@ function Home() {
 
              
 
-                <FaTrash
+                {/* <FaTrash
                   className='del-icon'
                   onClick={() => handleDeleteSlot(slot._id)}
-                />
+                /> */}
               </section>
                </Link>
                {role === 'admin' && (
@@ -161,15 +161,15 @@ function Home() {
         </p>
         <div id='button-date'>
           <input type='date' id='dateInput' min={maxDate} />
-          <button onClick={handleGoToDate}>Go to </button>
+          <button className='goToDateButton' onClick={handleGoToDate}>Go to </button>
         </div>
       </div>
 
       <div className='venue-tabs'>
-        <button onClick={() => handleVenueChange('')}>All</button>
-        <button onClick={() => handleVenueChange('RAJ_SOIN')}>RAJ SOIN HALL</button>
-        <button onClick={() => handleVenueChange('BR_AUDI')}>BR AUDI</button>
-        <button onClick={() => handleVenueChange('SPS_13')}>SPS 13</button>
+        <button className='venueButton' onClick={() => handleVenueChange('')}>All</button>
+        <button className='venueButton' onClick={() => handleVenueChange('RAJ_SOIN')}>RAJ SOIN HALL</button>
+        <button className='venueButton' onClick={() => handleVenueChange('BR_AUDI')}>BR AUDI</button>
+        <button className='venueButton' onClick={() => handleVenueChange('SPS_13')}>SPS 13</button>
       </div>
 
       {renderEvents()}
