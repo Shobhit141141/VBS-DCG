@@ -6,6 +6,7 @@ table{
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
+    background-color: #00000080;
 }
 th,td{
     border: 1px solid;
@@ -14,6 +15,7 @@ th,td{
     border-radius: 3px;
 }
 th{
-    background-color: #d4d4d4;
+    background-color: #ffffff;
+    color: black;
     font-size: x-large;
 }

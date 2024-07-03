@@ -1,6 +1,5 @@
 .menubar-comp{
     margin-bottom: 150px;
-   background-color: black;
     
 }
 .nav_logout{
@@ -35,13 +34,12 @@
         position: absolute;
         top: 0;
         right: 0;
-
-        background-color: white;
+        
         z-index: 999;
     }
     .nav_list a {
         text-decoration: none;
-        color: black;
+        color: white;
         font-size: 20px;
         transition: color 0.2s, border-bottom 0.2s; 
         border-bottom: 2px solid transparent;
@@ -49,9 +47,9 @@
     
     .nav_list a:hover {
         text-decoration: none;
-        color: black;
+        color: white;
         font-size: 20px;
-        border-bottom: 2px solid black; /
+        border-bottom: 2px solid white; /
     }
     #menubar{
         display: none;

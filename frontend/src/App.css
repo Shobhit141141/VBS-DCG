@@ -4,6 +4,14 @@
   padding: 10px;
   overflow-x: hidden;
   text-align: center;
+  /* background: rgb(246,253,85);
+  background: linear-gradient(90deg, rgba(246,253,85,0.22731764773105056) 35%, rgba(125,248,255,0.4248860367888013) 100%); */
+
+  background-image: url("../public/assets/dtu_bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white;
 }
 
 .logo {
@@ -17,6 +25,11 @@
 }
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 @keyframes logo-spin {

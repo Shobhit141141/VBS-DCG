@@ -1,6 +1,3 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import Book from "./pages/Book";
 import Home from "./pages/Home";
@@ -14,10 +11,25 @@ import MySlots from "./pages/MySlots";
 import Contact from "./pages/Contact";
 import Holidays from "./pages/Holidays";
 import Event from "./pages/SingleEvent";
+import bg from "/assets/dtu_bg_image.png";
+import { useContext, useEffect } from "react";
+import { BackgroundContext } from "./context/BgContext";
 function App() {
+  const { background, handleBg } = useContext(BackgroundContext);
+  useEffect(() => {
+    handleBg();
+  }, []);
   return (
     <>
-      <div className="main">
+      <div
+        className="main"
+        style={{
+          backgroundImage: `url(${background})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          height: "100vh",
+        }}
+      >
         <BrowserRouter>
           <Toaster />
           <Nav />

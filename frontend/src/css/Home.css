@@ -1,58 +1,198 @@
-.sections{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, 300px);
-    gap: 50px;
-    justify-content: center;
-    
+.sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  gap: 50px;
+  justify-content: center;
 }
 
-.todays-details section{
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 300px;
-    height: auto;
-    background-color: rgb(255, 255, 149);
-    border-radius: 20px;    
-    margin: 10px 0;
-    padding: 20px;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
+.todays-details section {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 300px;
+  height: auto;
+  background-color: rgb(255, 255, 149);
+  border-radius: 20px;
+  margin: 10px 0;
+  padding: 20px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 
-    transition: all 0.4s;
+  transition: all 0.4s;
 }
-.todays-details section:hover{
-    transform: scale(1.04) rotate(-2deg);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
+.todays-details section:hover {
+  transform: scale(1.04) rotate(-2deg);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-#Date{  
-    font-size: 40px;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 10px;
-    margin-top: 10px;
+#Date {
+  font-size: 40px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  color: white;
 }
-h2{font-weight: 800;}
-h3{font-weight: 500;}
-h4{font-weight: 500;}
-h5{font-weight: 500;
-color: #0000EE;}
+h2 {
+  font-weight: 800;
+}
+h3 {
+  font-weight: 500;
+}
+h4 {
+  font-weight: 500;
+}
+h5 {
+  font-weight: 500;
+  color: #0000ee;
+}
 
+.del-icon {
+  background-color: rgb(255, 78, 69);
+  padding: 8px;
+  border-radius: 50%;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
 
-.del-icon{
-    background-color: rgb(255, 78, 69);
-    padding: 8px;
-    border-radius: 50%;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    cursor: pointer;
+.del-icon:hover {
+  background-color: rgb(220, 1, 1);
+}
+
+.admin-panel {
+  display: flex;
+  gap: 15px;
+  width: 300px;
+  margin: 10px;
+}
+
+.button-approve {
+  background-color: rgb(23, 240, 103);
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+  font: bold;
+  width: 80px;
+  transition: all 0.2s;
+}
+
+.button-approve:hover {
+  background-color: rgba(0, 162, 60, 0.8);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.button-reject {
+  background-color: rgb(240, 37, 23);
+  padding: 8px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 4px 5px 8px rgba(0, 0, 0, 0.2);
+  color: white;
+  font: bold;
+  width: 80px;
+  transition: all 0.2s;
+}
+
+.button-reject:hover {
+  background-color: rgb(201, 46, 15);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.venue-tabs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.venue-tabs button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.venue-tabs button:hover {
+  background-color: #ddd;
+}
+
+.venue-tabs button.active {
+  background-color: #007bff;
+  color: white; /* Text color for active tab */
+}
+
+/* Home.css */
+
+/* Styles for Confirmation Dialog */
+
+.confirmation-dialog {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.confirmation-dialog p {
+  color: black;
+  margin-bottom: 10px;
+}
+
+.confirmation-dialog button {
+  margin: 0 10px;
+  padding: 8px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  outline: none;
+}
+
+.confirmation-dialog button:hover {
+  background-color: #0056b3;
+}
+
+.confirmation-dialog button:last-child {
     transition: all 0.2s;
+  background-color: #bdbdbd;
 }
 
-.del-icon:hover{
-    background-color:rgb(220, 1, 1);
+.confirmation-dialog button:last-child:hover {
+  background-color: #757474;
+}
+
+.conf-message {
+  display: flex;
+  gap: 5px;
+}
+
+.conf-reject{
+    color: white;
+    background-color: rgb(240, 37, 23);
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+.conf-approve{
+    color: white;
+    background-color: rgba(0, 162, 60, 0.8);
+    padding: 2px 4px;
+    border-radius: 4px;
 }

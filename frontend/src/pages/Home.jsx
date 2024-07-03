@@ -1,33 +1,47 @@
-import { useContext, useEffect, useState } from 'react';
-import '../css/Home.css';
-import { fetchSlots, deleteSlot} from '../../api/slotsApi';
+import React, { useContext, useEffect, useState } from "react";
+import "../css/Home.css";
+import { fetchSlots, deleteSlot } from "../../api/slotsApi";
 
-import toast from 'react-hot-toast';
-import { SLOTS, VENUES } from '../../constants';
-import { FaTrash } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
-import { approveBooking, rejectBooking } from '../../api/adminApi';
+import toast from "react-hot-toast";
+import { SLOTS, VENUES } from "../../constants";
+import { FaTrash } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/AuthContext";
+import { approveBooking, rejectBooking } from "../../api/adminApi";
+import { BackgroundContext } from "../context/BgContext";
 
 function Home() {
   const { role } = useContext(AuthContext);
   const [homeData, setHomeData] = useState({
     date: new Date(),
-    status: '',
+    status: "",
   });
-  const [selectedVenue, setSelectedVenue] = useState('');
+  const [selectedVenue, setSelectedVenue] = useState("");
   const [todaySlots, setTodaySlots] = useState([]);
+  const [confirmAction, setConfirmAction] = useState({
+    action: "",
+    bookingId: null,
+  });
+
+  const { handleBg } = useContext(BackgroundContext);
+
+  const changeBackground = (venue) => {
+    handleBg(venue);
+  };
+
+
+  
 
   const handleGoToDate = () => {
-    const inputDate = new Date(document.getElementById('dateInput').value);
-    if (inputDate == 'Invalid Date') {
-      toast.error('Select a valid date');
+    const inputDate = new Date(document.getElementById("dateInput").value);
+    if (inputDate == "Invalid Date") {
+      toast.error("Select a valid date");
       return;
     }
     setHomeData({ ...homeData, date: inputDate });
   };
 
-  const maxDate = new Date().toISOString().split('T')[0];
+  const maxDate = new Date().toISOString().split("T")[0];
 
   const fetchTodaySlots = async () => {
     try {
@@ -47,40 +61,51 @@ function Home() {
   const handleDeleteSlot = async (id) => {
     try {
       await deleteSlot(id);
-      toast.success('Slot deleted successfully');
+      toast.success("Slot deleted successfully");
       fetchTodaySlots();
     } catch (error) {
       console.log(error);
-      toast.error('Failed to delete slot');
+      toast.error("Failed to delete slot");
     }
   };
 
   const handleVenueChange = (venue) => {
+    handleBg(venue);
     setSelectedVenue(venue);
   };
 
   const handleApprove = async (bookingId) => {
-    try {
-      const result = await approveBooking(bookingId);
-      toast.success('Booking approved successfully');
-      fetchTodaySlots()
-      // Optionally update UI or fetch updated data
-    } catch (error) {
-      console.error('Error approving booking:', error);
-      toast.error('Failed to approve booking');
-    }
+    setConfirmAction({ action: "approve", bookingId });
   };
 
   const handleReject = async (bookingId) => {
-    try {
-      const result = await rejectBooking(bookingId);
-      toast.success('Booking rejected successfully');
-      fetchTodaySlots()
-      // Optionally update UI or fetch updated data
-    } catch (error) {
-      console.error('Error rejecting booking:', error);
-      toast.error('Failed to reject booking');
+    setConfirmAction({ action: "reject", bookingId });
+  };
+
+  const confirmActionHandler = async () => {
+    const { action, bookingId } = confirmAction;
+    if (action === "approve") {
+      try {
+        const result = await approveBooking(bookingId);
+        toast.success("Booking approved successfully");
+        fetchTodaySlots();
+      } catch (error) {
+        console.error("Error approving booking:", error);
+        toast.error("Failed to approve booking");
+      }
+    } else if (action === "reject") {
+      try {
+        const result = await rejectBooking(bookingId);
+        toast.success("Booking rejected successfully");
+        fetchTodaySlots();
+      } catch (error) {
+        console.error("Error rejecting booking:", error);
+        toast.error("Failed to reject booking");
+      }
     }
+
+    // Clear the confirmation action after handling
+    setConfirmAction({ action: "", bookingId: null });
   };
 
   const renderEvents = () => {
@@ -98,21 +123,21 @@ function Home() {
     }
 
     return (
-      <div className='sections'>
+      <div className="sections">
         {filteredSlots.map((slot) => (
-          <div className='todays-details'>
-               <Link to={`/event/${slot._id}`} key={slot._id}>
+          <div className="todays-details" key={slot._id}>
+            <Link to={`/event/${slot._id}`}>
               <section>
                 <h2>{VENUES[slot.venue]}</h2>
                 <h3>
                   <b>Event :</b> {slot.title}
                 </h3>
                 <h3>
-                  <div style={{ display: 'flex' }}>
-                    <b>Slots : </b>{' '}
+                  <div style={{ display: "flex" }}>
+                    <b>Slots : </b>{" "}
                     <div>
                       {slot.slots.sort().map((item) => (
-                        <p style={{ marginLeft: '2px' }} key={item}>
+                        <p style={{ marginLeft: "2px" }} key={item}>
                           {SLOTS[item]}
                         </p>
                       ))}
@@ -128,21 +153,29 @@ function Home() {
                 </h3>
                 <h5>{slot.details}</h5>
 
-             
-
                 <FaTrash
-                  className='del-icon'
+                  className="del-icon"
                   onClick={() => handleDeleteSlot(slot._id)}
                 />
               </section>
-               </Link>
-               {role === 'admin' && (
-                  <div>
-                    <button onClick={() => handleApprove(slot._id)}>Approve</button>
-                    <button onClick={() => handleReject(slot._id)}>Reject</button>
-                  </div>
-                )}
-            </div>
+            </Link>
+            {role === "admin" && (
+              <div className="admin-panel">
+                <button
+                  className="button-approve"
+                  onClick={() => handleApprove(slot._id)}
+                >
+                  Approve
+                </button>
+                <button
+                  className="button-reject"
+                  onClick={() => handleReject(slot._id)}
+                >
+                  Reject
+                </button>
+              </div>
+            )}
+          </div>
         ))}
       </div>
     );
@@ -150,29 +183,74 @@ function Home() {
 
   return (
     <div>
-      <div className='todays-details' id='Date'>
+      <div className="todays-details" id="Date">
         <p>
-          {homeData.date.toLocaleDateString('en-US', {
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
+          {homeData.date.toLocaleDateString("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
           })}
         </p>
-        <div id='button-date'>
-          <input type='date' id='dateInput' min={maxDate} />
+        <div id="button-date">
+          <input type="date" id="dateInput" min={maxDate} />
           <button onClick={handleGoToDate}>Go to </button>
         </div>
       </div>
 
-      <div className='venue-tabs'>
-        <button onClick={() => handleVenueChange('')}>All</button>
-        <button onClick={() => handleVenueChange('RAJ_SOIN')}>RAJ SOIN HALL</button>
-        <button onClick={() => handleVenueChange('BR_AUDI')}>BR AUDI</button>
-        <button onClick={() => handleVenueChange('SPS_13')}>SPS 13</button>
+      <div className="venue-tabs">
+        <button
+          className={selectedVenue === "" ? "active" : ""}
+          onClick={() => handleVenueChange("")}
+        >
+          All
+        </button>
+        <button
+          className={selectedVenue === "RAJ_SOIN" ? "active" : ""}
+          onClick={() => handleVenueChange("RAJ_SOIN")}
+        >
+          RAJ SOIN HALL
+        </button>
+        <button
+          className={selectedVenue === "BR_AUDI" ? "active" : ""}
+          onClick={() => handleVenueChange("BR_AUDI")}
+        >
+          BR AUDI
+        </button>
+        <button
+          className={selectedVenue === "SPS_13" ? "active" : ""}
+          onClick={() => handleVenueChange("SPS_13")}
+        >
+          SPS 13
+        </button>
       </div>
 
       {renderEvents()}
+
+      {/* Confirmation Dialog */}
+      {confirmAction.action && (
+        <div className="confirmation">
+          <div className="confirmation-dialog">
+          <p>Are you sure you want to {confirmAction.action} this booking?</p>
+          <button onClick={confirmActionHandler}>Confirm</button>
+          <button onClick={() => setConfirmAction({ action: "", bookingId: null })}>Cancel</button>
+        </div>
+        </div>
+      )}
+
+{/* {confirmAction.action && (
+        <div className="confirmation">
+          <div className="confirmation-dialog">
+            <p className="conf-message">Are you sure you want to {confirmAction.action === "approve" ? <p className="conf-approve">Approve</p> : <p className="conf-reject">Reject</p> } this booking?</p>
+            <button onClick={confirmActionHandler}>Confirm</button>
+            <button
+              onClick={() => setConfirmAction({ action: "", bookingId: null })}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )} */}
     </div>
   );
 }

@@ -16,6 +16,7 @@ function Nav() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('socId');
     navigate('/login');
     setMenu(false);
   };

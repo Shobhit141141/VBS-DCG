@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../css/Book.css";
@@ -7,6 +7,7 @@ import { bookSlot, fetchAvailableSlots } from "../../api/slotsApi";
 import { useNavigate } from "react-router-dom";
 import ToolTip from "../components/ToolTip";
 import { SLOTS } from "../../constants";
+import { BackgroundContext } from "../context/BgContext";
 
 const Book = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ const Book = () => {
   const [availableSlots, setAvailableSlots] = useState([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const navigate = useNavigate();
+  const { handleBg } = useContext(BackgroundContext);
 
   useEffect(() => {
     const fetchSlots = async () => {
@@ -45,6 +47,12 @@ const Book = () => {
     fetchSlots();
   }, [formData.date, formData.venue]);
 
+  useEffect(() => {
+    if (formData.venue) {
+      handleBg(formData.venue);
+    }
+  }, [formData.venue, handleBg]);
+
   const handleChange = async (e) => {
     const { name, value, checked, files } = e.target;
 
@@ -61,6 +69,9 @@ const Book = () => {
       setFormData({ ...formData, files: base64Files });
     } else {
       setFormData({ ...formData, [name]: value });
+      if (name === "venue") {
+        handleBg(value);
+      }
     }
   };
 
