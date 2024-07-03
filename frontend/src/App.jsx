@@ -11,7 +11,6 @@ import MySlots from "./pages/MySlots";
 import Contact from "./pages/Contact";
 import Holidays from "./pages/Holidays";
 import Event from "./pages/SingleEvent";
-import bg from "/assets/dtu_bg_image.png";
 import { useContext, useEffect } from "react";
 import { BackgroundContext } from "./context/BgContext";
 function App() {
