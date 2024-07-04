@@ -32,6 +32,8 @@ const LoginForm = () => {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('name', response.data.result.name); 
       localStorage.setItem('socId',response.data.result._id)
+    window.location.reload();
+
    
       
   

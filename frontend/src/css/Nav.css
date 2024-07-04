@@ -1,98 +1,117 @@
-.menubar-comp{
-    margin-bottom: 150px;
-    
+.menubar-comp {
+  margin-bottom: 150px;
 }
-.nav_logout{
-    font-size: 20px;
-    cursor: pointer;
-    transition: all 0.2s ;
-    color: red;
+#navbar-menus {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.656);
+  display: fixed;
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(10px);
+}
+.nav_logout {
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: red;
 }
 
-.nav_logout:hover{
-    transform: rotate(180deg) scale(1.04);
-    color: red;
+.nav_logout:hover {
+  transform: rotate(180deg) scale(1.04);
+  color: red;
 }
-.nav_toggle{
-    color: black;
-    transition: 0.2s;
+.nav_toggle {
+  color: white;
+  transition: 0.2s;
 }
-.nav_toggle.open{
+.nav_toggle.open {
+  color: white;
+}
+
+@media (width> 768px) {
+  .nav_list {
+    width: 65%;
+    height: 90px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    z-index: 999;
+  }
+  .nav_list a {
+    text-decoration: none;
     color: white;
+    font-size: 20px;
+    transition: color 0.2s, border-bottom 0.2s;
+    border-bottom: 2px solid transparent;
+  }
+
+  .nav_list a:hover {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    border-bottom: 2px solid white;
+  }
+  #menubar {
+    display: none;
+    color: white;
+  }
+  .nav_list {
+    display: flex;
+  }
 }
 
-@media (width> 768px){
-    .nav_list {
-        width: 65%;
-        height: 90px;
-        margin: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-evenly;
-        align-items: center;
-        
-        position: absolute;
-        top: 0;
-        right: 0;
-        
-        z-index: 999;
-    }
-    .nav_list a {
-        text-decoration: none;
-        color: white;
-        font-size: 20px;
-        transition: color 0.2s, border-bottom 0.2s; 
-        border-bottom: 2px solid transparent;
-    }
-    
-    .nav_list a:hover {
-        text-decoration: none;
-        color: white;
-        font-size: 20px;
-        border-bottom: 2px solid white; 
-    }
-    #menubar{
-        display: none;
-    }
-    .nav_list {
-        display: flex;
-    }
-    
-    
-    }
-    
-    @media (width< 768px) {
-        #menubar{
-            display: block;
-            position: fixed;
-            top: 40px;
-            right: 40px;
-            z-index: 1000;
+@media (width< 768px) {
+  #menubar {
+    display: block;
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    z-index: 1000;
+    color: white;
+    font-size: 30px;
+  }
+  .nav_list {
+    display: none;
+    transition: all 0.4s;
+  }
+  .nav_list_active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: rgb(17, 17, 17);
+    height: 100%;
+    margin: auto;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+  }
+  .nav_list_active a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+  }
+  #navbar-menus {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.86);
+    display: fixed;
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(10px);
+  }
+}
 
-        }
-        .nav_list {
-            display: none;
-            transition: all 0.4s;
-        }
-        .nav_list_active{
-            display: flex;
-            flex-direction: column;
-            width: 100%;
-            background-color: rgb(17, 17, 17);
-            height: 100%;
-            margin: auto;
-            gap: 10px;
-            justify-content: center;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            z-index: 999;
-        }
-        .nav_list_active a{
-            text-decoration: none;
-            color: rgb(255, 255, 255);
-            font-size: 20px;
-        }
-    }
+.nav_list a.active {
+  border-bottom: 2px solid white; /* Highlight the active tab */
+}

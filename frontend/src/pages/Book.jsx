@@ -33,9 +33,7 @@ const Book = () => {
             date: formData.date,
             venue: formData.venue,
           });
-          console.log(response)
           setAvailableSlots(response.availableSlots);
-          console.log(availableSlots)
         } catch (error) {
           toast.error("Error fetching available slots");
         } finally {
@@ -98,7 +96,7 @@ const Book = () => {
     try {
       const response = await bookSlot(formData);
       toast.success("Slot booking request created");
-      navigate("/");
+      navigate("/my-slots");
     } catch (error) {
       toast.error(error.response.data.error);
     }

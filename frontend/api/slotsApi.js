@@ -13,6 +13,8 @@ export const fetchSlots = async (slotDetails) => {
   return res;
 };
 
+
+
 export const fetchSlot = async ({ id }) => {
     const res = await axios.get(
       `${server_uri}/booking/fetch/booked-slot/${id}`,
@@ -47,6 +49,15 @@ export const fetchAvailableSlots = async (slotDetails) => {
       date: slotDetails.date,
       venue: slotDetails.venue,
     },
+    { headers: { Authorization: localStorage.getItem("token") } }
+  );
+  return res.data;
+};
+
+
+export const fetchBookingsBySocId = async (socId) => {
+  const res = await axios.get(
+    `${server_uri}/booking/soc/${socId}/bookings`,
     { headers: { Authorization: localStorage.getItem("token") } }
   );
   return res.data;
