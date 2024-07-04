@@ -13,18 +13,19 @@
   align-items: flex-start;
   width: 300px;
   height: auto;
-  background-color: rgb(255, 255, 149);
+  background-color: rgba(0, 0, 0, 0.763);
   border-radius: 20px;
   margin: 10px 0;
   padding: 20px;
   position: relative;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  color: white;
 
   transition: all 0.4s;
 }
 .todays-details section:hover {
-  transform: scale(1.04) rotate(-2deg);
+  transform: translateY(-5px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 #Date {
@@ -227,4 +228,62 @@ h5 {
 }
 .venue-tabs{
   margin-top: 40px;
+}
+
+.status-approved {
+  color: #17ee7f; /* Green */
+}
+
+.status-pending {
+  color: #feba4b; /* Yellow */
+}
+
+.status-rejected {
+  color: #ff3b2d; /* Red */
+}
+.status-box{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2px;
+}
+.dot-symbol{
+  margin: 0;
+  padding: 0;
+  height: 40px;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.each-slot{
+  background-color: white;
+  color: black;
+  padding: 0 5px;
+  margin: 20px 0 0 0;
+}
+
+.all-slots{
+  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 140px);
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+@media (width<512px) {
+  .todays-details{
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  .sections {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+  }
+  
 }

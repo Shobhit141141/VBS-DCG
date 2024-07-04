@@ -29,9 +29,6 @@ function Home() {
     handleBg(venue);
   };
 
-
-  
-
   const handleGoToDate = () => {
     const inputDate = new Date(document.getElementById("dateInput").value);
     if (inputDate == "Invalid Date") {
@@ -118,6 +115,12 @@ function Home() {
       filteredSlots = todaySlots.filter((slot) => slot.venue === selectedVenue);
     }
 
+    if (role !== "admin") {
+      filteredSlots = filteredSlots.filter(
+        (slot) => slot.status === "Approved"
+      );
+    }
+
     if (filteredSlots.length === 0) {
       return <h1>No slots found for selected venue</h1>;
     }
@@ -129,15 +132,24 @@ function Home() {
             <Link to={`/event/${slot._id}`}>
               <section>
                 <h2>{VENUES[slot.venue]}</h2>
-                <h3>
+                {/* <h3>
                   <b>Event :</b> {slot.title}
                 </h3>
+                
                 <h3>
-                  <div style={{ display: "flex" }}>
-                    <b>Slots : </b>{" "}
-                    <div>
+                  <b>Booked by :</b> {slot.organizer}
+                </h3> */}
+
+                <h3>
+                {slot.title} <b>by {slot.organizer}</b> 
+                </h3>
+
+                <h3>
+                  <div>
+                
+                    <div className="all-slots">
                       {slot.slots.sort().map((item) => (
-                        <p style={{ marginLeft: "2px" }} key={item}>
+                        <p style={{ marginLeft: "2px" }} key={item} className="each-slot">
                           {SLOTS[item]}
                         </p>
                       ))}
@@ -145,18 +157,16 @@ function Home() {
                     </div>
                   </div>
                 </h3>
-                <h3>
-                  <b>Booked by :</b> {slot.organizer}
-                </h3>
-                <h3>
-                  <b>Status:</b> {slot.status}
-                </h3>
-                <h5>{slot.details}</h5>
-
-                <FaTrash
-                  className="del-icon"
-                  onClick={() => handleDeleteSlot(slot._id)}
-                />
+                {role === "admin" && (
+                  <h3
+                    className={`status-${slot.status.toLowerCase()}`}
+                  >
+                   <div className="status-box">
+                   <pre className="dot-symbol">• </pre>
+                   <p>{slot.status}</p>
+                   </div>
+                  </h3>
+                )}
               </section>
             </Link>
             {role === "admin" && (
@@ -231,14 +241,18 @@ function Home() {
       {confirmAction.action && (
         <div className="confirmation">
           <div className="confirmation-dialog">
-          <p>Are you sure you want to {confirmAction.action} this booking?</p>
-          <button onClick={confirmActionHandler}>Confirm</button>
-          <button onClick={() => setConfirmAction({ action: "", bookingId: null })}>Cancel</button>
-        </div>
+            <p>Are you sure you want to {confirmAction.action} this booking?</p>
+            <button onClick={confirmActionHandler}>Confirm</button>
+            <button
+              onClick={() => setConfirmAction({ action: "", bookingId: null })}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       )}
 
-{/* {confirmAction.action && (
+      {/* {confirmAction.action && (
         <div className="confirmation">
           <div className="confirmation-dialog">
             <p className="conf-message">Are you sure you want to {confirmAction.action === "approve" ? <p className="conf-approve">Approve</p> : <p className="conf-reject">Reject</p> } this booking?</p>
