@@ -5,6 +5,7 @@
   justify-content: center;
 }
 
+
 .todays-details section {
   display: flex;
   flex-direction: column;
@@ -195,4 +196,35 @@ h5 {
     background-color: rgba(0, 162, 60, 0.8);
     padding: 2px 4px;
     border-radius: 4px;
+}
+
+#button-date {
+  display: flex;
+  align-items: center; 
+
+}
+
+#dateInput {
+  padding: 8px; 
+  margin-right: 10px; 
+}
+
+#dateInput:focus {
+  outline: none;
+}
+
+#button-date button {
+  padding: 10px 12px; 
+  background-color: #1aa85f; 
+  color: white; 
+  border: none;
+  cursor: pointer; 
+  transition: all 0.4s;
+}
+
+#button-date button:hover {
+  background-color: #097b07; 
+}
+.venue-tabs{
+  margin-top: 40px;
 }

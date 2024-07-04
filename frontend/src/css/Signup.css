@@ -9,6 +9,7 @@
 }
 
 .signup-heading {
+  color: black;
   font-size: 24px;
   margin-bottom: 20px;
 }
@@ -51,4 +52,11 @@
 
 .submit-button:hover {
   background-color: #333;
+}
+
+@media (width<768px) {
+  .signup-page {
+    width: 90%;
+    padding: 15px;
+  }
 }
