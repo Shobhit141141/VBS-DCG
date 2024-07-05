@@ -101,7 +101,7 @@ const Book = () => {
       toast.error(error.response.data.error);
     }
   };
-
+  const maxDate = new Date().toISOString().split("T")[0];
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
       <div className="form-group">
@@ -123,11 +123,13 @@ const Book = () => {
           <h3>Event Date</h3>
           <ToolTip text="Select Date" />
         </label>
-        <DatePicker
+        <input
+          type="date"
           name="date"
-          selected={new Date(formData.date)}
-          onChange={handleDateChange}
+          value={formData.date}
+          onChange={(e) => handleDateChange(new Date(e.target.value))}
           dateFormat="yyyy-MM-dd"
+          min={maxDate}
         />
       </div>
 

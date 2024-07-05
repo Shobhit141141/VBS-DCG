@@ -14,7 +14,16 @@
   background-repeat: no-repeat;
   color: white;
 }
-
+.dtu-logo{
+  height: 50px;
+  width: 50px;
+  background-color: white;
+  padding: 5px;
+  border-radius: 50%;
+}
+.dtu-logo img{
+  object-fit: cover;
+}
 .logo {
   height: 6em;
   padding: 1.5em;

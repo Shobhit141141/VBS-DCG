@@ -43,6 +43,10 @@ function Nav() {
         </div>
       </div>
       <div className={`nav_list${menu ? "_active" : ""} `} id="navbar-menus">
+
+      <div className="dtu-logo">
+        <img src="/assets/image.png" alt="" />
+      </div>
         <Link 
           to="/" 
           className={`nav_home ${activeTab === "/" ? "active" : ""}`} 
