@@ -91,18 +91,35 @@ const Book = () => {
     });
   };
 
+  const [showDownload, setShowDownload] = useState(false);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await bookSlot(formData);
       toast.success("Slot booking request created");
       navigate("/my-slots");
+      setShowDownload(true);
     } catch (error) {
       toast.error(error.response.data.error);
     }
   };
+
+  const handleDownload = () => {
+    const fileUrl = "VBS-DCG/frontend/public/assets/BookingForm.pdf";
+    const fileName = "BookingForm.pdf";
+
+    const a = document.createElement("a");
+    a.href = fileUrl;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
   const maxDate = new Date().toISOString().split("T")[0];
   return (
+    <div>
     <form className="booking-form" onSubmit={handleSubmit}>
       <div className="form-group">
         <label>
@@ -207,6 +224,12 @@ const Book = () => {
 
       <button type="submit">Submit</button>
     </form>
+    {showDownload && (
+        <button onClick={handleDownload} style={{ marginTop: "10px" }}>
+          Download File
+        </button>
+      )}
+    </div>
   );
 };
 
